@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nifty Desk</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+<style>
+:root{
+  --bg:#F5F3EF;
+  --surface:#FFFFFF;
+  --surface-2:#EFECE5;
+  --border:#DDD8CC;
+  --text:#1C1B18;
+  --text-muted:#68635A;
+  --accent:#1F5C4C;
+  --accent-soft:#D9E8E1;
+  --long:#1F7A4D;
+  --long-soft:#DDEEE2;
+  --short:#B23A2E;
+  --short-soft:#F5DEDA;
+  --amber:#9C6B12;
+  --amber-soft:#F1E4C8;
+  --mono-num: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12130F;
+    --surface:#1B1C17;
+    --surface-2:#22231D;
+    --border:#34352C;
+    --text:#EDEBE3;
+    --text-muted:#9B978A;
+    --accent:#5FBE9C;
+    --accent-soft:#1E3730;
+    --long:#63C98B;
+    --long-soft:#1B3324;
+    --short:#E88478;
+    --short-soft:#3B2220;
+    --amber:#E3B15C;
+    --amber-soft:#3A2E14;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12130F;
+  --surface:#1B1C17;
+  --surface-2:#22231D;
+  --border:#34352C;
+  --text:#EDEBE3;
+  --text-muted:#9B978A;
+  --accent:#5FBE9C;
+  --accent-soft:#1E3730;
+  --long:#63C98B;
+  --long-soft:#1B3324;
+  --short:#E88478;
+  --short-soft:#3B2220;
+  --amber:#E3B15C;
+  --amber-soft:#3A2E14;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0; background:var(--bg);}
+body{
+  color:var(--text);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  padding-inline:20px;
+  padding-block:24px 56px;
+}
+h1,h2,h3{font-family:"IBM Plex Sans",sans-serif; text-wrap:balance; margin:0;}
+.num{font-family:var(--mono-num); font-variant-numeric:tabular-nums;}
+a{color:var(--accent);}
+
+.wrap{max-width:1080px; margin:0 auto; display:flex; flex-direction:column; gap:20px;}
+
+/* header */
+.topbar{
+  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+  gap:14px; padding-bottom:16px; border-bottom:1px solid var(--border);
+}
+.brandline{display:flex; flex-direction:column; gap:4px;}
+.eyebrow{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted);}
+.title{font-size:26px; font-weight:600;}
+.spot{display:flex; align-items:baseline; gap:10px;}
+.spot .price{font-size:32px; font-weight:600;}
+.spot .chg{font-size:15px; font-weight:600; padding:2px 8px; border-radius:5px;}
+.chg.up{color:var(--long); background:var(--long-soft);}
+.chg.down{color:var(--short); background:var(--short-soft);}
+.meta{font-size:12.5px; color:var(--text-muted);}
+
+/* grid */
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+@media (max-width:760px){ .grid{grid-template-columns:1fr;} }
+.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:18px 20px; display:flex; flex-direction:column; gap:12px;
+}
+.card.full{grid-column:1/-1;}
+.card-head{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+.card-head h2{font-size:14px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); font-weight:600;}
+.pill{font-size:11.5px; font-weight:600; padding:3px 9px; border-radius:99px; white-space:nowrap;}
+.pill.long{color:var(--long); background:var(--long-soft);}
+.pill.short{color:var(--short); background:var(--short-soft);}
+.pill.amber{color:var(--amber); background:var(--amber-soft);}
+.pill.neutral{color:var(--text-muted); background:var(--surface-2);}
+
+.bignum{font-size:28px; font-weight:600;}
+.bignum.long{color:var(--long);}
+.bignum.short{color:var(--short);}
+.subline{font-size:13px; color:var(--text-muted);}
+
+table{width:100%; border-collapse:collapse; font-size:12.5px;}
+th{text-align:left; font-weight:600; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:.04em; padding:6px 8px; border-bottom:1px solid var(--border);}
+td{padding:7px 8px; border-bottom:1px solid var(--border);}
+tr:last-child td{border-bottom:none;}
+.tbl-wrap{overflow-x:auto;}
+.right{text-align:right;}
+
+.spark{display:flex; align-items:flex-end; gap:3px; height:36px; margin-top:2px;}
+.spark i{flex:1; background:var(--accent-soft); border-radius:2px 2px 0 0; display:block;}
+.spark i.last{background:var(--accent);}
+
+.levelbar{position:relative; height:34px; border-radius:6px; background:var(--surface-2); margin-top:4px;}
+.levelbar .zone{position:absolute; top:0; bottom:0; background:var(--accent-soft); border-radius:6px;}
+.levelbar .spotmark{position:absolute; top:-6px; bottom:-6px; width:2px; background:var(--text);}
+.levelbar .spotmark::after{content:attr(data-label); position:absolute; top:-20px; left:50%; transform:translateX(-50%); font-size:11px; font-weight:600; white-space:nowrap;}
+.levellabels{display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-muted); margin-top:4px;}
+
+.kv{display:flex; justify-content:space-between; gap:10px; font-size:13px; padding:5px 0; border-bottom:1px dashed var(--border);}
+.kv:last-child{border-bottom:none;}
+.kv .k{color:var(--text-muted);}
+.kv .v{font-weight:600; text-align:right;}
+
+.evrow{display:flex; gap:12px; padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;}
+.evrow:last-child{border-bottom:none;}
+.evdate{width:92px; flex-shrink:0; color:var(--text-muted); font-size:12px;}
+.evtag{font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; font-weight:600; padding:1px 6px; border-radius:4px; white-space:nowrap; height:fit-content;}
+.evtag.hol{color:var(--short); background:var(--short-soft);}
+.evtag.mpc{color:var(--amber); background:var(--amber-soft);}
+.evtag.macro{color:var(--text-muted); background:var(--surface-2);}
+.evbody{flex:1;}
+
+.circ{display:flex; flex-direction:column; gap:2px; padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;}
+.circ:last-child{border-bottom:none;}
+.circ .src{font-weight:600;} .circ .d{color:var(--text-muted); font-size:12px;}
+
+.testflag{font-size:11.5px; color:var(--amber); background:var(--amber-soft); padding:6px 10px; border-radius:6px; margin-top:4px;}
+
+footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top:8px;}
+
+/* option chain chart */
+.oc-tabs{display:flex; flex-wrap:wrap; gap:6px;}
+.oc-tab{font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text-muted); background:var(--surface-2); border:1px solid var(--border); border-radius:7px; padding:6px 12px; cursor:pointer;}
+.oc-tab .sub{display:block; font-size:10px; font-weight:500; letter-spacing:.03em; text-transform:uppercase; opacity:.75;}
+.oc-tab[aria-selected="true"]{color:var(--surface); background:var(--text); border-color:var(--text);}
+.oc-summary{display:flex; flex-wrap:wrap; gap:18px; font-size:13px;}
+.oc-summary .item{display:flex; flex-direction:column; gap:1px;}
+.oc-summary .item .lbl{font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted);}
+.oc-summary .item .val{font-weight:600;}
+.oc-chartrow{display:flex; gap:0; border:1px solid var(--border); border-radius:8px; overflow:hidden;}
+.oc-yaxis{flex-shrink:0; width:48px; background:var(--surface); border-right:1px solid var(--border);}
+.oc-scroll{overflow-x:auto; overflow-y:hidden; flex:1; background:var(--surface);}
+.oc-scroll svg, .oc-yaxis svg{display:block;}
+.oc-legend{display:flex; flex-wrap:wrap; gap:16px; font-size:12px; color:var(--text-muted);}
+.oc-legend .sw{display:inline-block; width:11px; height:11px; border-radius:2px; margin-right:5px; vertical-align:-1px;}
+.oc-legend .sw.put.fill{background:var(--long);}
+.oc-legend .sw.put.outline{background:var(--surface); border:2px solid var(--long);}
+.oc-legend .sw.call.fill{background:var(--short);}
+.oc-legend .sw.call.outline{background:var(--surface); border:2px solid var(--short);}
+.oc-detail{font-size:13px; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:10px 14px; min-height:20px;}
+.oc-detail b{font-weight:600;}
+.oc-detail .strikebig{font-size:15px; font-weight:700; margin-right:6px;}
+
+.updated-banner{font-size:11.5px; color:var(--text-muted); background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:8px 14px;}
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="updated-banner">This is a standalone page (not hosted on Claude) &mdash; the data below is a snapshot from the last time Ashish asked for it to be refreshed and redeployed. Ask Ashish for a fresh sync if you need current numbers.</div>
+
+  <div class="topbar">
+    <div class="brandline">
+      <div class="eyebrow">Option Trading &middot; Personal Desk</div>
+      <div class="title">Nifty Desk</div>
+      <div class="meta">Snapshot generated 18 Sep 2026, 21:43 IST &middot; refreshed after market close</div>
+    </div>
+    <div>
+      <div class="spot">
+        <span class="price num">23,346.40</span>
+        <span class="chg up">+0.33%</span>
+      </div>
+      <div class="meta">India VIX 11.39 <span style="color:var(--long); font-weight:600;">(&minus;4.4% over 7d)</span></div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- Variable 1 -->
+    <div class="card">
+      <div class="card-head">
+        <h2>Var 1 &middot; FII vs Retail (Extent of Diff)</h2>
+        <span class="pill short">Above P90</span>
+      </div>
+      <div>
+        <div class="bignum short num">5.30</div>
+        <div class="subline">P90 threshold: <span class="num">3.95</span> &middot; P25 threshold: <span class="num">0.70</span></div>
+      </div>
+      <div class="kv"><span class="k">FII stance</span><span class="v" style="color:var(--short);">NET SHORT</span></div>
+      <div class="kv"><span class="k">Net FII</span><span class="v num">&minus;288.4</span></div>
+      <div class="kv"><span class="k">Net Client</span><span class="v num">+241.4</span></div>
+      <div>
+        <div class="subline" style="margin-bottom:4px;">7-day Extent of Diff</div>
+        <div class="spark" title="5.07 -> 5.30 over 7 sessions">
+          <i style="height:73%"></i><i style="height:82%"></i><i style="height:85%"></i>
+          <i style="height:100%"></i><i style="height:90%"></i><i style="height:98%"></i>
+          <i class="last" style="height:99%"></i>
+        </div>
+        <div class="levellabels"><span>09-09</span><span>09-18</span></div>
+      </div>
+    </div>
+
+    <!-- Variable 2 -->
+    <div class="card">
+      <div class="card-head">
+        <h2>Var 2 &middot; Nifty Futures OI (Cumulative)</h2>
+        <span class="pill long">Long Buildup</span>
+      </div>
+      <div>
+        <div class="bignum long num">+0.70%</div>
+        <div class="subline">OI change rate vs prior day base</div>
+      </div>
+      <div class="kv"><span class="k">Total OI</span><span class="v num">22,395,945</span></div>
+      <div class="kv"><span class="k">Change in OI</span><span class="v num" style="color:var(--long);">+154,830</span></div>
+      <div class="kv"><span class="k">Streak</span><span class="v">1 session (regime just turned)</span></div>
+      <div class="kv"><span class="k">Unusual volume</span><span class="v" style="color:var(--text-muted); font-weight:500;">N/A &mdash; building 5d history</span></div>
+      <div class="kv"><span class="k">Support / resistance (OI-derived)</span><span class="v" style="color:var(--text-muted); font-weight:500;">None active yet</span></div>
+    </div>
+
+    <!-- Variable 3 -->
+    <div class="card full">
+      <div class="card-head">
+        <h2>Var 3 &middot; Option Chain &mdash; Open Interest by Strike</h2>
+        <span class="pill neutral">Click any bar for exact OI + today's change</span>
+      </div>
+
+      <div class="oc-tabs" id="ocTabs" role="tablist"></div>
+      <div class="oc-summary" id="ocSummary"></div>
+
+      <div class="oc-chartrow">
+        <div class="oc-yaxis"><svg id="ocYAxis" width="48" height="300"></svg></div>
+        <div class="oc-scroll"><svg id="ocSvg" height="300"></svg></div>
+      </div>
+
+      <div class="oc-detail" id="ocDetail">Tap or click any bar for the exact standing OI and today's change at that strike.</div>
+
+      <div class="oc-legend">
+        <span><i class="sw put fill"></i>Put OI (build-up)</span>
+        <span><i class="sw put outline"></i>Put OI (unwind)</span>
+        <span><i class="sw call fill"></i>Call OI (build-up)</span>
+        <span><i class="sw call outline"></i>Call OI (unwind)</span>
+      </div>
+
+      <div class="subline" id="ocRuleLine">Rule: Max Call OI strike = resistance (upper bound) &mdash; large call writers defend it from above. Max Put OI strike = support (lower bound) &mdash; large put writers defend it from below. Market expected to hold inside these two strikes through the shown expiry, absent a fresh writer shift.</div>
+    </div>
+
+    <!-- Verdict -->
+    <div class="card">
+      <div class="card-head">
+        <h2>Ashish's Verdict &mdash; 18 Sep</h2>
+        <span class="pill amber">Unverified test entry</span>
+      </div>
+      <div class="kv"><span class="k">Range</span><span class="v num">23,000 &ndash; 24,000</span></div>
+      <div class="kv"><span class="k">Direction</span><span class="v" style="color:var(--short);">BEARISH</span></div>
+      <div class="kv"><span class="k">Nifty at formation</span><span class="v num">23,370.0</span></div>
+      <div class="testflag">Journal note on this entry reads: "Test capture &mdash; delete this entry from journal after verifying." Flagging rather than treating it as a real call &mdash; confirm or clear it and it'll update here.</div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="card full">
+      <div class="card-head">
+        <h2>30-Day Forward Lookahead</h2>
+        <span class="meta">Calendar refreshed 18 Sep &middot; next refresh due 16 Oct</span>
+      </div>
+      <div>
+        <div class="evrow">
+          <div class="evdate">01 Oct Thu</div>
+          <span class="evtag mpc">RBI Reg</span>
+          <div class="evbody">Governance Amendment Directions for banks take effect</div>
+        </div>
+        <div class="evrow">
+          <div class="evdate">02 Oct Fri</div>
+          <span class="evtag hol">NSE Holiday</span>
+          <div class="evbody">Gandhi Jayanti &mdash; markets closed</div>
+        </div>
+        <div class="evrow">
+          <div class="evdate">02 Oct Fri</div>
+          <span class="evtag macro">US Macro</span>
+          <div class="evbody">US Nonfarm Payrolls, Sep 2026</div>
+        </div>
+        <div class="evrow">
+          <div class="evdate">05&ndash;07 Oct</div>
+          <span class="evtag mpc">RBI MPC</span>
+          <div class="evbody">MPC meets Oct 5&ndash;7; repo decision Oct 7 (currently 5.25%, unchanged)</div>
+        </div>
+        <div class="evrow">
+          <div class="evdate">12 Oct Mon</div>
+          <span class="evtag macro">India Macro</span>
+          <div class="evbody">India CPI (Sep) + IIP (Aug), approx. date</div>
+        </div>
+        <div class="evrow">
+          <div class="evdate">14 Oct Wed</div>
+          <span class="evtag macro">US Macro</span>
+          <div class="evbody">US CPI (Sep)</div>
+        </div>
+        <div class="evrow">
+          <div class="evdate">20 Oct Tue</div>
+          <span class="evtag hol">NSE Holiday</span>
+          <div class="evbody">Dussehra &mdash; markets closed</div>
+        </div>
+        <div class="evrow">
+          <div class="evdate">27&ndash;28 Oct</div>
+          <span class="evtag mpc">Fed FOMC</span>
+          <div class="evbody">FOMC meets; rate decision Oct 28</div>
+        </div>
+      </div>
+
+      <h2 style="margin-top:6px;">Recent SEBI / RBI Circulars (trailing 7d)</h2>
+      <div>
+        <div class="circ">
+          <span class="src">SEBI &mdash; 15 Sep</span>
+          <span>ETF base price / price band / close-out norms now effective (final extension from Jun 15 circular).</span>
+        </div>
+        <div class="circ">
+          <span class="src">SEBI &mdash; 14 Sep</span>
+          <span>Proposed net settlement framework for eligible MF cash-market transactions, to cut settlement risk.</span>
+        </div>
+        <div class="circ">
+          <span class="src">RBI &mdash; 14 Sep</span>
+          <span>Draft Interest Rates on Loans and Advances Directions 2026 &mdash; consolidates six RE circulars into one rulebook, comments invited.</span>
+        </div>
+        <div class="circ">
+          <span class="src">SEBI &mdash; 12 Sep</span>
+          <span>Revamped nomination norms for demat accounts and MF folios, effective Sep 1 &mdash; now mandatory for new single-holder accounts.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>Snapshot, not live &mdash; ask Ashish's assistant to refresh after the next session and this page redeploys to the same link.</footer>
+</div>
+
+<script>
+(function(){
+  var OC_DATA = {"spot":23346.4,"as_of":"2026-09-18","expiries":{"2026-09-22":{"tag":"weekly","pcr":1.06,"totalCE":146220360,"totalPE":154946350,"rows":[[21850.0,0,0,438685,-19045],[21900.0,0,0,1921465,-682500],[21950.0,0,0,513890,-35880],[22000.0,22490,1560,10741510,-175955],[22050.0,325,0,717925,122915],[22100.0,1170,0,2368275,466765],[22150.0,260,0,1149135,499590],[22200.0,2665,0,5006950,1208675],[22250.0,520,0,1024660,248300],[22300.0,8385,-390,5147740,694070],[22350.0,715,325,1645280,-74165],[22400.0,2470,-325,4242420,1065740],[22450.0,455,0,1949740,1073150],[22500.0,84045,-6435,9022520,646360],[22550.0,2730,65,1807845,731900],[22600.0,40755,-3185,5245435,584155],[22650.0,16965,260,1745315,-470795],[22700.0,52520,-6890,6306950,295490],[22750.0,34385,1820,4104555,2020590],[22800.0,119275,15795,7208240,1826240],[22850.0,52910,-4680,3170115,1368575],[22900.0,136565,11375,4972825,1380665],[22950.0,87490,17030,3692390,1281670],[23000.0,621790,-284310,10994165,1341470],[23050.0,154050,-23660,2870595,-267410],[23100.0,594425,-228345,6429865,1068340],[23150.0,349635,-158275,3903380,882570],[23200.0,2665520,-661440,9601865,902850],[23250.0,1811745,-1272635,6490705,1823510],[23300.0,7419685,815165,12686570,5893550],[23350.0,4955600,1473875,5143060,3557385],[23400.0,8768240,2245100,4787315,1807455],[23450.0,3859895,382655,696605,83200],[23500.0,9226165,242190,2405260,153790],[23550.0,3655340,402220,262535,-19825],[23600.0,7909005,1241500,739765,-10335],[23650.0,4041700,964600,196560,-30810],[23700.0,9495720,1934465,536770,-171405],[23750.0,4303715,501865,101660,-6890],[23800.0,8214375,-153465,458770,-25610],[23850.0,2976675,158860,72670,3315],[23900.0,5844280,-960440,436865,-14365],[23950.0,2368145,253240,75010,-2990],[24000.0,11558560,1248715,921505,-122395],[24050.0,1801475,-12220,24050,-390],[24100.0,5163795,1682070,138060,-4160],[24150.0,2433210,626925,24115,-1105],[24200.0,6358625,949715,166790,-11375],[24250.0,1300650,-223795,24635,-585],[24300.0,4095000,286715,94250,-2990],[24350.0,1200095,162240,14625,1300],[24400.0,2863510,209235,113230,-3705],[24450.0,632255,71305,12350,-65],[24500.0,10050300,-399685,274950,-14820],[24550.0,910065,53365,23855,-1495],[24600.0,2319980,140920,46150,-1170],[24650.0,415935,4940,5070,-325],[24700.0,2274870,-140075,5785,-585],[24750.0,189865,53495,0,0],[24800.0,2749370,486395,23075,-650]]},"2026-09-29":{"tag":"weekly_monthly","pcr":1.01,"totalCE":72972835,"totalPE":73687340,"rows":[[21850.0,65,0,50960,-18785],[21900.0,585,0,367120,32500],[21950.0,130,0,185965,-13260],[22000.0,784095,-13000,4009980,197665],[22050.0,65,0,180635,-17160],[22100.0,1040,0,410800,69030],[22150.0,390,0,134680,67535],[22200.0,1300,0,1129765,452075],[22250.0,325,0,244335,130585],[22300.0,1495,0,781365,135590],[22350.0,130,0,163540,30420],[22400.0,520,130,1464125,746330],[22450.0,65,0,283855,104130],[22500.0,590655,-715,4601870,711295],[22550.0,520,0,337870,60775],[22600.0,3575,260,1392625,261625],[22650.0,43875,0,265330,62985],[22700.0,21710,-585,1794780,563160],[22750.0,4355,-910,319215,42640],[22800.0,297375,-5005,2044965,198315],[22850.0,6825,2015,402675,160550],[22900.0,133380,1300,1555970,206895],[22950.0,11245,1300,427700,130130],[23000.0,1251445,-42315,7245435,256465],[23050.0,22880,260,734110,393965],[23100.0,306930,5525,1583790,48815],[23150.0,160225,-136110,645060,91650],[23200.0,1612195,106860,3150420,-117845],[23250.0,903760,142870,1231880,25740],[23300.0,4443335,921440,5337020,1089725],[23350.0,649935,237185,482365,239590],[23400.0,3109080,609570,2431650,358085],[23450.0,556530,156585,195650,18525],[23500.0,5020145,409305,4574765,14365],[23550.0,502385,145600,135720,-2860],[23600.0,2516020,167895,1370005,-42250],[23650.0,633165,124670,202800,-6630],[23700.0,2703090,975,1025570,-7475],[23750.0,957190,435825,136240,2470],[23800.0,4392505,275470,1674465,-33410],[23850.0,631020,231205,79170,-2730],[23900.0,4274595,845065,978965,36075],[23950.0,528775,-2210,118820,5460],[24000.0,10381280,467090,5434790,-112060],[24050.0,486655,40235,90025,1820],[24100.0,2026310,58955,771745,-19890],[24150.0,658970,130975,158210,-715],[24200.0,3489005,-107510,1713660,-7930],[24250.0,537680,17745,158275,-65],[24300.0,4495985,-299065,2952885,-1820],[24350.0,494455,-43485,314275,-1885],[24400.0,3063190,178295,1908140,-7345],[24450.0,325910,-34710,80145,-780],[24500.0,5496465,-147030,2897115,-15600],[24550.0,296205,-8580,45695,-1105],[24600.0,1207700,-77610,661050,-5330],[24650.0,176995,21190,34840,-1365],[24700.0,1505400,102895,218335,-2600],[24750.0,212615,-37505,26845,-845],[24800.0,1039090,-20280,337285,-3185]]},"2026-10-06":{"tag":"weekly","pcr":0.61,"totalCE":4145830,"totalPE":2535455,"rows":[[21850.0,0,0,845,0],[21900.0,0,0,19240,3510],[21950.0,0,0,4810,780],[22000.0,260,0,176150,69810],[22050.0,0,0,4095,1950],[22100.0,0,0,36660,16900],[22150.0,0,0,3250,520],[22200.0,0,0,64285,14105],[22250.0,0,0,8190,4745],[22300.0,0,0,55250,25935],[22350.0,0,0,8645,2860],[22400.0,0,0,46410,25870],[22450.0,0,0,14300,1495],[22500.0,455,390,216060,51740],[22550.0,325,0,9815,1040],[22600.0,130,0,111865,18330],[22650.0,0,0,6760,1690],[22700.0,195,0,64740,21775],[22750.0,260,65,24895,7800],[22800.0,2145,390,108225,39390],[22850.0,390,65,28600,10400],[22900.0,2470,195,102570,41275],[22950.0,2405,260,24570,-390],[23000.0,40365,2405,324805,39520],[23050.0,2730,325,28665,9880],[23100.0,8840,1105,98670,62660],[23150.0,7995,1950,22750,12025],[23200.0,95810,12415,128765,11830],[23250.0,25935,0,31915,-1560],[23300.0,186160,69095,225940,58825],[23350.0,34970,21580,48815,24765],[23400.0,227305,142675,170690,103805],[23450.0,34385,-27040,8710,2795],[23500.0,329225,70785,174460,49920],[23550.0,34125,6955,6500,1300],[23600.0,129935,49400,33280,11700],[23650.0,26065,4030,6825,5070],[23700.0,168025,86450,22035,5005],[23750.0,31655,15795,2275,195],[23800.0,245635,110565,16250,2795],[23850.0,35620,12545,4290,65],[23900.0,173940,51025,2145,-130],[23950.0,46085,8190,1690,0],[24000.0,1155570,359125,31785,7280],[24050.0,32500,13455,195,0],[24100.0,218335,76310,1625,910],[24150.0,23270,9230,0,0],[24200.0,161135,51480,260,0],[24250.0,23140,6500,65,0],[24300.0,146705,44850,130,0],[24350.0,0,0,0,0],[24400.0,108355,46995,0,0],[24450.0,0,0,0,0],[24500.0,273780,49920,1690,195],[24550.0,0,0,0,0],[24600.0,59475,4680,0,0],[24650.0,1105,0,0,0],[24700.0,22815,11440,0,0],[24750.0,2665,65,0,0],[24800.0,23140,13910,0,0]]},"2026-10-27":{"tag":"monthly_next","pcr":1.22,"totalCE":13660920,"totalPE":16640650,"rows":[[21850.0,0,0,4095,455],[21900.0,0,0,61230,13065],[21950.0,0,0,9880,2730],[22000.0,106405,-195,1156480,290745],[22050.0,0,0,8775,1495],[22100.0,0,0,59670,2665],[22150.0,4810,0,10725,-4355],[22200.0,2730,0,118365,21190],[22250.0,13130,0,486460,-5005],[22300.0,130,0,418990,64220],[22350.0,0,0,18850,-715],[22400.0,0,0,177125,25740],[22450.0,0,0,32825,1235],[22500.0,157885,3770,1902290,101985],[22550.0,1690,65,28860,5590],[22600.0,1690,0,237770,-4875],[22650.0,1105,0,22425,5070],[22700.0,3185,260,417040,77805],[22750.0,1105,195,18460,2795],[22800.0,22360,10010,357045,31460],[22850.0,390,0,29965,2665],[22900.0,9945,3120,243425,59670],[22950.0,650,0,19890,-195],[23000.0,434265,12480,2229890,42315],[23050.0,1885,-260,24375,6825],[23100.0,33865,1040,273325,34580],[23150.0,3770,650,29250,0],[23200.0,137475,-18005,457145,20670],[23250.0,21515,-1625,36335,-3250],[23300.0,548535,41990,815555,45565],[23350.0,26065,11050,113100,79885],[23400.0,259545,36985,381030,57135],[23450.0,19370,-585,63115,5070],[23500.0,1287455,137215,1667900,53170],[23550.0,15990,1170,20865,4095],[23600.0,320255,2600,234130,18980],[23650.0,27625,-780,30290,650],[23700.0,363090,50115,317005,4485],[23750.0,27885,520,11440,455],[23800.0,739960,19955,494715,22620],[23850.0,41925,3640,9230,-130],[23900.0,400985,63700,176735,520],[23950.0,77350,47125,6370,0],[24000.0,2896790,497510,1534195,-20605],[24050.0,82940,54795,5785,0],[24100.0,566345,142610,201305,9880],[24150.0,105625,72150,15730,0],[24200.0,764530,161590,213915,-1885],[24250.0,88530,38870,12350,130],[24300.0,507585,75465,136760,1430],[24350.0,44395,130,11960,0],[24400.0,373360,10270,113815,-2925],[24450.0,41210,-1690,11570,0],[24500.0,1997515,200395,754260,24180],[24550.0,44980,1300,7280,0],[24600.0,342615,2145,92625,585],[24650.0,24245,-1365,3705,0],[24700.0,252720,195,124605,1690],[24750.0,25025,845,1300,0],[24800.0,386490,36140,167050,390]]}}};
+
+  var TAB_META = {
+    "CUMULATIVE": {label:"All Expiries", sub:"Cumulative"},
+    "2026-09-22": {label:"22 Sep", sub:"Weekly"},
+    "2026-09-29": {label:"29 Sep", sub:"Monthly (Sep)"},
+    "2026-10-06": {label:"06 Oct", sub:"Weekly"},
+    "2026-10-27": {label:"27 Oct", sub:"Monthly (Oct)"}
+  };
+  var ORDER = ["CUMULATIVE","2026-09-22","2026-09-29","2026-10-06","2026-10-27"];
+
+  // Build the cumulative (all-expiries) book. All 4 expiries share the same
+  // strike grid (21850-24800 @ 50pt) so a plain per-index sum lines up.
+  (function buildCumulative(){
+    var keys = ["2026-09-22","2026-09-29","2026-10-06","2026-10-27"];
+    var base = OC_DATA.expiries[keys[0]].rows;
+    var rows = base.map(function(r){ return [r[0], 0, 0, 0, 0]; });
+    keys.forEach(function(k){
+      OC_DATA.expiries[k].rows.forEach(function(r, i){
+        rows[i][1] += r[1]; rows[i][2] += r[2]; rows[i][3] += r[3]; rows[i][4] += r[4];
+      });
+    });
+    var totalCE = 0, totalPE = 0;
+    keys.forEach(function(k){ totalCE += OC_DATA.expiries[k].totalCE; totalPE += OC_DATA.expiries[k].totalPE; });
+    OC_DATA.expiries["CUMULATIVE"] = {
+      tag: "cumulative", rows: rows, totalCE: totalCE, totalPE: totalPE,
+      pcr: Math.round((totalPE/totalCE)*100)/100
+    };
+  })();
+
+  var tabsEl = document.getElementById("ocTabs");
+  var summaryEl = document.getElementById("ocSummary");
+  var ruleEl = document.getElementById("ocRuleLine");
+  var detailEl = document.getElementById("ocDetail");
+  var svg = document.getElementById("ocSvg");
+  var yAxis = document.getElementById("ocYAxis");
+  var selectedIdx = null;
+
+  function fmtL(v){ // value in lakhs, short form
+    if (v >= 1e7) return (v/1e7).toFixed(2) + "Cr";
+    if (v >= 1e5) return (v/1e5).toFixed(1) + "L";
+    return v.toLocaleString("en-IN");
+  }
+  function fmtStrike(s){ return s.toLocaleString("en-IN"); }
+
+  function niceMax(v){
+    if (v <= 0) return 100000;
+    var mag = Math.pow(10, Math.floor(Math.log10(v)));
+    var n = v / mag;
+    var step = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+    return step * mag;
+  }
+
+  function updateDetail(expKey, rows){
+    if (selectedIdx === null || selectedIdx >= rows.length){
+      detailEl.innerHTML = "Tap or click any bar for the exact standing OI and today's change at that strike.";
+      return;
+    }
+    var r = rows[selectedIdx];
+    var strike = r[0], callOI = r[1], callChg = r[2], putOI = r[3], putChg = r[4];
+    var callWord = callChg >= 0 ? "build-up" : "unwind";
+    var putWord = putChg >= 0 ? "build-up" : "unwind";
+    detailEl.innerHTML =
+      "<span class='strikebig'>" + fmtStrike(strike) + "</span>" +
+      "&mdash; " + TAB_META[expKey].label + (expKey === "CUMULATIVE" ? "" : " expiry") + "<br>" +
+      "<b style='color:var(--short)'>Call OI:</b> " + callOI.toLocaleString("en-IN") + " standing, " +
+      "<b>" + (callChg>=0?"+":"") + callChg.toLocaleString("en-IN") + "</b> today (" + callWord + ")" +
+      "&nbsp;&nbsp;|&nbsp;&nbsp;" +
+      "<b style='color:var(--long)'>Put OI:</b> " + putOI.toLocaleString("en-IN") + " standing, " +
+      "<b>" + (putChg>=0?"+":"") + putChg.toLocaleString("en-IN") + "</b> today (" + putWord + ")";
+  }
+
+  function render(expKey){
+    var blk = OC_DATA.expiries[expKey];
+    var rows = blk.rows; // [strike, callOI, callChg, putOI, putChg]
+    var spot = OC_DATA.spot;
+
+    // tabs
+    tabsEl.innerHTML = "";
+    ORDER.forEach(function(k){
+      var meta = TAB_META[k];
+      var btn = document.createElement("button");
+      btn.className = "oc-tab";
+      btn.type = "button";
+      btn.setAttribute("role","tab");
+      btn.setAttribute("aria-selected", k === expKey ? "true" : "false");
+      btn.innerHTML = meta.label + "<span class='sub'>" + meta.sub + "</span>";
+      btn.addEventListener("click", function(){ render(k); });
+      tabsEl.appendChild(btn);
+    });
+
+    // summary
+    var maxCall = rows.reduce(function(a,b){ return b[1] > a[1] ? b : a; });
+    var maxPut = rows.reduce(function(a,b){ return b[3] > a[3] ? b : a; });
+    summaryEl.innerHTML =
+      "<div class='item'><span class='lbl'>Nifty</span><span class='val num'>" + spot.toLocaleString("en-IN") + "</span></div>" +
+      "<div class='item'><span class='lbl'>Total Call OI</span><span class='val num'>" + fmtL(blk.totalCE) + "</span></div>" +
+      "<div class='item'><span class='lbl'>Total Put OI</span><span class='val num'>" + fmtL(blk.totalPE) + "</span></div>" +
+      "<div class='item'><span class='lbl'>PCR</span><span class='val num'>" + blk.pcr + "</span></div>" +
+      "<div class='item'><span class='lbl'>Resistance (Max Call OI)</span><span class='val num' style='color:var(--short)'>" + fmtStrike(maxCall[0]) + "</span></div>" +
+      "<div class='item'><span class='lbl'>Support (Max Put OI)</span><span class='val num' style='color:var(--long)'>" + fmtStrike(maxPut[0]) + "</span></div>";
+
+    ruleEl.innerHTML = "Rule: Max Call OI strike (<b style='color:var(--short)'>" + fmtStrike(maxCall[0]) + "</b>) = resistance &mdash; large call writers defend it from above. Max Put OI strike (<b style='color:var(--long)'>" + fmtStrike(maxPut[0]) + "</b>) = support &mdash; large put writers defend it from below. Market expected to hold inside this band through the " + TAB_META[expKey].label + " expiry, absent a fresh writer shift.";
+
+    // chart geometry
+    var groupW = 26, barW = 10, gap = 2;
+    var chartH = 220, axisH = 60, topPad = 14;
+    var totalH = chartH + axisH + topPad;
+    var w = rows.length * groupW + 20;
+
+    var maxVal = 0;
+    rows.forEach(function(r){ maxVal = Math.max(maxVal, r[1], r[3]); });
+    var yMax = niceMax(maxVal);
+
+    function y(v){ return topPad + chartH - (v / yMax) * chartH; }
+
+    // find spot position (nearest strike)
+    var spotIdx = 0, spotDiff = Infinity;
+    rows.forEach(function(r, i){ var d = Math.abs(r[0]-spot); if (d < spotDiff){ spotDiff = d; spotIdx = i; } });
+    var spotX = 10 + spotIdx * groupW + groupW/2;
+
+    var svgParts = [];
+    // gridlines
+    var ticks = 5;
+    for (var t=0; t<=ticks; t++){
+      var val = yMax * t / ticks;
+      var yy = y(val);
+      svgParts.push('<line x1="0" y1="'+yy+'" x2="'+w+'" y2="'+yy+'" stroke="var(--border)" stroke-width="1" />');
+    }
+    // spot line
+    svgParts.push('<line x1="'+spotX+'" y1="'+topPad+'" x2="'+spotX+'" y2="'+(topPad+chartH)+'" stroke="var(--text)" stroke-width="1.4" stroke-dasharray="4,3" />');
+    svgParts.push('<text x="'+spotX+'" y="'+(topPad-4)+'" text-anchor="middle" font-size="11" font-weight="600" fill="var(--text)">NIFTY '+spot.toLocaleString("en-IN")+'</text>');
+
+    // selection highlight (drawn first, sits behind the bars)
+    if (selectedIdx !== null && selectedIdx < rows.length){
+      var hgx = 10 + selectedIdx * groupW - 2;
+      svgParts.push('<rect x="'+hgx+'" y="'+topPad+'" width="'+(groupW+2)+'" height="'+chartH+'" fill="var(--amber-soft)" />');
+    }
+
+    rows.forEach(function(r, i){
+      var strike = r[0], callOI = r[1], callChg = r[2], putOI = r[3], putChg = r[4];
+      var gx = 10 + i * groupW;
+      var putX = gx, callX = gx + barW + gap;
+
+      var putH = (putOI / yMax) * chartH, callH = (callOI / yMax) * chartH;
+      var putY = topPad + chartH - putH, callY = topPad + chartH - callH;
+
+      var putFill = putChg >= 0 ? "var(--long)" : "var(--surface)";
+      var putStroke = "var(--long)";
+      var callFill = callChg >= 0 ? "var(--short)" : "var(--surface)";
+      var callStroke = "var(--short)";
+
+      // full-height invisible hit area so a short bar is still easy to tap
+      svgParts.push('<rect class="oc-hit" data-idx="'+i+'" x="'+gx+'" y="'+topPad+'" width="'+(barW*2+gap)+'" height="'+chartH+'" fill="transparent" style="cursor:pointer" />');
+
+      if (putH > 0.5) svgParts.push('<rect data-idx="'+i+'" x="'+putX+'" y="'+putY+'" width="'+barW+'" height="'+putH+'" fill="'+putFill+'" stroke="'+putStroke+'" stroke-width="1.3" style="cursor:pointer; pointer-events:none;"><title>Strike '+strike.toLocaleString("en-IN")+' PUT OI '+putOI.toLocaleString("en-IN")+' (chg '+(putChg>=0?"+":"")+putChg.toLocaleString("en-IN")+')</title></rect>');
+      if (callH > 0.5) svgParts.push('<rect data-idx="'+i+'" x="'+callX+'" y="'+callY+'" width="'+barW+'" height="'+callH+'" fill="'+callFill+'" stroke="'+callStroke+'" stroke-width="1.3" style="cursor:pointer; pointer-events:none;"><title>Strike '+strike.toLocaleString("en-IN")+' CALL OI '+callOI.toLocaleString("en-IN")+' (chg '+(callChg>=0?"+":"")+callChg.toLocaleString("en-IN")+')</title></rect>');
+
+      // x label, rotated
+      var lx = gx + barW + gap/2;
+      var ly = topPad + chartH + 14;
+      var isSel = selectedIdx === i;
+      svgParts.push('<text x="'+lx+'" y="'+ly+'" font-size="9.5" fill="'+(isSel ? "var(--text)" : "var(--text-muted)")+'" font-weight="'+(isSel?"700":"400")+'" text-anchor="end" transform="rotate(-60 '+lx+' '+ly+')">'+strike.toLocaleString("en-IN")+'</text>');
+    });
+
+    svg.onclick = function(e){
+      var idx = e.target.getAttribute && e.target.getAttribute("data-idx");
+      if (idx === null || idx === undefined) return;
+      selectedIdx = parseInt(idx, 10);
+      render(expKey);
+    };
+
+    updateDetail(expKey, rows);
+
+    svg.setAttribute("width", w);
+    svg.setAttribute("height", totalH);
+    svg.setAttribute("viewBox", "0 0 " + w + " " + totalH);
+    svg.innerHTML = svgParts.join("");
+
+    // y axis (fixed, non-scrolling)
+    yAxis.setAttribute("height", totalH);
+    yAxis.setAttribute("viewBox", "0 0 48 " + totalH);
+    var yParts = [];
+    for (var t2=0; t2<=ticks; t2++){
+      var val2 = yMax * t2 / ticks;
+      var yy2 = y(val2);
+      yParts.push('<text x="44" y="'+(yy2+3)+'" font-size="10" fill="var(--text-muted)" text-anchor="end">'+fmtL(val2)+'</text>');
+    }
+    yAxis.innerHTML = yParts.join("");
+  }
+
+  render(ORDER[0]);
+})();
+</script>
+</body>
+</html>
