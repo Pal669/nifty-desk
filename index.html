@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nifty Desk</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ud83dudcc8</text></svg>">
 <style>
 :root{
   --bg:#F5F3EF;
@@ -72,7 +72,6 @@ a{color:var(--accent);}
 
 .wrap{max-width:1080px; margin:0 auto; display:flex; flex-direction:column; gap:20px;}
 
-/* header */
 .topbar{
   display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
   gap:14px; padding-bottom:16px; border-bottom:1px solid var(--border);
@@ -87,7 +86,6 @@ a{color:var(--accent);}
 .chg.down{color:var(--short); background:var(--short-soft);}
 .meta{font-size:12.5px; color:var(--text-muted);}
 
-/* grid */
 .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
 @media (max-width:760px){ .grid{grid-template-columns:1fr;} }
 .card{
@@ -106,6 +104,8 @@ a{color:var(--accent);}
 .bignum{font-size:28px; font-weight:600;}
 .bignum.long{color:var(--long);}
 .bignum.short{color:var(--short);}
+.bignum.amber{color:var(--amber);}
+.bignum.neutral{color:var(--text-muted);}
 .subline{font-size:13px; color:var(--text-muted);}
 
 table{width:100%; border-collapse:collapse; font-size:12.5px;}
@@ -152,7 +152,6 @@ tr:last-child td{border-bottom:none;}
 
 footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top:8px;}
 
-/* option chain chart */
 .oc-tabs{display:flex; flex-wrap:wrap; gap:6px;}
 .oc-tab{font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text-muted); background:var(--surface-2); border:1px solid var(--border); border-radius:7px; padding:6px 12px; cursor:pointer;}
 .oc-tab .sub{display:block; font-size:10px; font-weight:500; letter-spacing:.03em; text-transform:uppercase; opacity:.75;}
@@ -183,70 +182,59 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
 <body>
 <div class="wrap">
 
-  <div class="updated-banner">This is a standalone page (not hosted on Claude) &mdash; the data below is a snapshot from the last time Ashish asked for it to be refreshed and redeployed. Ask Ashish for a fresh sync if you need current numbers.</div>
+  <div class="updated-banner">Automated daily sync &mdash; regenerated from Ashish's live option-trading-view variables each evening after market close (~7:54 PM IST). Not intraday-live.</div>
 
   <div class="topbar">
     <div class="brandline">
       <div class="eyebrow">Option Trading &middot; Personal Desk</div>
       <div class="title">Nifty Desk</div>
-      <div class="meta">Snapshot generated 18 Sep 2026, 21:43 IST &middot; refreshed after market close</div>
+      <div class="meta">Snapshot generated 22 Sep 2026, 15:12 IST</div>
     </div>
     <div>
       <div class="spot">
-        <span class="price num">23,346.40</span>
-        <span class="chg up">+0.33%</span>
+        <span class="price num">23,414.30</span>
+        <span class="chg up">+0.29%</span>
       </div>
-      <div class="meta">India VIX 11.39 <span style="color:var(--long); font-weight:600;">(&minus;4.4% over 7d)</span></div>
+      <div class="meta">India VIX 11.05 <span style="color:var(--long); font-weight:600;">(-1.0% over 7d)</span></div>
     </div>
   </div>
 
   <div class="grid">
 
-    <!-- Variable 1 -->
     <div class="card">
       <div class="card-head">
         <h2>Var 1 &middot; FII vs Retail (Extent of Diff)</h2>
-        <span class="pill short">Above P90</span>
+        <span class="pill short">Above P90 &mdash; extreme/crowded</span>
       </div>
       <div>
-        <div class="bignum short num">5.30</div>
-        <div class="subline">P90 threshold: <span class="num">3.95</span> &middot; P25 threshold: <span class="num">0.70</span></div>
+        <div class="bignum short num">5.32</div>
+        <div class="subline">P90 threshold: <span class="num">3.95</span> &middot; P25 threshold: <span class="num">0.7</span></div>
       </div>
       <div class="kv"><span class="k">FII stance</span><span class="v" style="color:var(--short);">NET SHORT</span></div>
-      <div class="kv"><span class="k">Net FII</span><span class="v num">&minus;288.4</span></div>
-      <div class="kv"><span class="k">Net Client</span><span class="v num">+241.4</span></div>
+      <div class="kv"><span class="k">Net FII</span><span class="v num">-290.6</span></div>
+      <div class="kv"><span class="k">Net Client</span><span class="v num">241.7</span></div>
       <div>
         <div class="subline" style="margin-bottom:2px;">7-day Extent of Diff</div>
-        <div class="spark">
-          <div class="spark-col"><span class="spark-val">5.07</span><div class="spark-bars"><div class="spark-bar" style="height:37%"></div></div><span class="spark-date">09-09</span></div>
-          <div class="spark-col"><span class="spark-val">5.13</span><div class="spark-bars"><div class="spark-bar" style="height:51%"></div></div><span class="spark-date">09-10</span></div>
-          <div class="spark-col"><span class="spark-val">5.16</span><div class="spark-bars"><div class="spark-bar" style="height:59%"></div></div><span class="spark-date">09-11</span></div>
-          <div class="spark-col"><span class="spark-val">5.31</span><div class="spark-bars"><div class="spark-bar" style="height:90%"></div></div><span class="spark-date">09-15</span></div>
-          <div class="spark-col"><span class="spark-val">5.21</span><div class="spark-bars"><div class="spark-bar" style="height:70%"></div></div><span class="spark-date">09-16</span></div>
-          <div class="spark-col"><span class="spark-val">5.29</span><div class="spark-bars"><div class="spark-bar" style="height:87%"></div></div><span class="spark-date">09-17</span></div>
-          <div class="spark-col last"><span class="spark-val">5.30</span><div class="spark-bars"><div class="spark-bar" style="height:88%"></div></div><span class="spark-date">09-18</span></div>
-        </div>
+        <div class="spark"><div class="spark-col "><span class="spark-val">5.13</span><div class="spark-bars"><div class="spark-bar" style="height:96%"></div></div><span class="spark-date">09-10</span></div><div class="spark-col "><span class="spark-val">5.16</span><div class="spark-bars"><div class="spark-bar" style="height:97%"></div></div><span class="spark-date">09-11</span></div><div class="spark-col "><span class="spark-val">5.30</span><div class="spark-bars"><div class="spark-bar" style="height:100%"></div></div><span class="spark-date">09-15</span></div><div class="spark-col "><span class="spark-val">5.21</span><div class="spark-bars"><div class="spark-bar" style="height:98%"></div></div><span class="spark-date">09-16</span></div><div class="spark-col "><span class="spark-val">5.29</span><div class="spark-bars"><div class="spark-bar" style="height:99%"></div></div><span class="spark-date">09-17</span></div><div class="spark-col "><span class="spark-val">5.30</span><div class="spark-bars"><div class="spark-bar" style="height:100%"></div></div><span class="spark-date">09-18</span></div><div class="spark-col last"><span class="spark-val">5.32</span><div class="spark-bars"><div class="spark-bar" style="height:100%"></div></div><span class="spark-date">09-21</span></div></div>
       </div>
     </div>
 
-    <!-- Variable 2 -->
     <div class="card">
       <div class="card-head">
         <h2>Var 2 &middot; Nifty Futures OI (Cumulative)</h2>
-        <span class="pill long">Long Buildup</span>
+        <span class="pill long">Short Covering</span>
       </div>
       <div>
-        <div class="bignum long num">+0.70%</div>
+        <div class="bignum short num">-0.21%</div>
         <div class="subline">OI change rate vs prior day base</div>
       </div>
-      <div class="kv"><span class="k">Total OI</span><span class="v num">22,395,945</span></div>
-      <div class="kv"><span class="k">Change in OI</span><span class="v num" style="color:var(--long);">+154,830</span></div>
-      <div class="kv"><span class="k">Streak</span><span class="v">1 session (regime just turned)</span></div>
-      <div class="kv"><span class="k">Unusual volume</span><span class="v" style="color:var(--text-muted); font-weight:500;">N/A &mdash; building 5d history</span></div>
+      <div class="kv"><span class="k">Total OI</span><span class="v num">22,347,910</span></div>
+      <div class="kv"><span class="k">Change in OI</span><span class="v num" style="color:var(--short);">-48,035</span></div>
+      <div class="kv"><span class="k">Streak</span><span class="v">1 session</span></div>
+      <div class="kv"><span class="k">Unusual volume</span><span class="v" style="color:var(--text-muted); font-weight:500;">N/A -- building 5d history</span></div>
       <div class="kv"><span class="k">Support / resistance (OI-derived)</span><span class="v" style="color:var(--text-muted); font-weight:500;">None active yet</span></div>
     </div>
 
-    <!-- Variable 3 -->
     <div class="card full">
       <div class="card-head">
         <h2>Var 3 &middot; Option Chain &mdash; Open Interest by Strike</h2>
@@ -273,115 +261,114 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
       <div class="subline" id="ocRuleLine">Rule: Max Call OI strike = resistance (upper bound) &mdash; large call writers defend it from above. Max Put OI strike = support (lower bound) &mdash; large put writers defend it from below. Market expected to hold inside these two strikes through the shown expiry, absent a fresh writer shift.</div>
     </div>
 
-    <!-- Verdict -->
     <div class="card">
       <div class="card-head">
-        <h2>Ashish's Verdict &mdash; 18 Sep</h2>
+        <h2>Ashish's Verdict &mdash; 2026-09-18</h2>
         <span class="pill amber">Unverified test entry</span>
       </div>
       <div class="kv"><span class="k">Range</span><span class="v num">23,000 &ndash; 24,000</span></div>
       <div class="kv"><span class="k">Direction</span><span class="v" style="color:var(--short);">BEARISH</span></div>
       <div class="kv"><span class="k">Nifty at formation</span><span class="v num">23,370.0</span></div>
-      <div class="testflag">Journal note on this entry reads: "Test capture &mdash; delete this entry from journal after verifying." Flagging rather than treating it as a real call &mdash; confirm or clear it and it'll update here.</div>
+      <div class="kv"><span class="k">Last scored view (2026-09-18)</span><span class="v" style="color:var(--long);">HIT</span></div>
+      <div class="testflag">Journal note on this entry reads: "Test capture -- delete this entry from journal after verifying." Flagging rather than treating it as a real call &mdash; confirm or clear it and it'll update here.</div>
     </div>
 
-    <!-- Calendar -->
     <div class="card full">
       <div class="card-head">
         <h2>30-Day Forward Lookahead</h2>
-        <span class="meta">Calendar refreshed 18 Sep &middot; next refresh due 16 Oct</span>
+        <span class="meta">Calendar refreshed 2026-09-18 &middot; next refresh due 2026-10-20</span>
       </div>
-      <div>
-        <div class="evrow">
-          <div class="evdate">01 Oct Thu</div>
-          <span class="evtag mpc">RBI Reg</span>
-          <div class="evbody">Governance Amendment Directions for banks take effect</div>
-        </div>
-        <div class="evrow">
-          <div class="evdate">02 Oct Fri</div>
-          <span class="evtag hol">NSE Holiday</span>
-          <div class="evbody">Gandhi Jayanti &mdash; markets closed</div>
-        </div>
-        <div class="evrow">
-          <div class="evdate">02 Oct Fri</div>
+      <div><div class="evrow">
+          <div class="evdate">1 Oct</div>
+          <span class="evtag macro">RBI Regulatory</span>
+          <div class="evbody">RBI Governance Amendment Directions -- effective date</div>
+        </div><div class="evrow">
+          <div class="evdate">2 Oct</div>
+          <span class="evtag hol">NSE Trading Holiday</span>
+          <div class="evbody">Gandhi Jayanti -- NSE/BSE CLOSED</div>
+        </div><div class="evrow">
+          <div class="evdate">2 Oct</div>
+          <span class="evtag hol">Public Holiday</span>
+          <div class="evbody">Gandhi Jayanti -- National Public Holiday</div>
+        </div><div class="evrow">
+          <div class="evdate">2 Oct</div>
           <span class="evtag macro">US Macro</span>
-          <div class="evbody">US Nonfarm Payrolls, Sep 2026</div>
-        </div>
-        <div class="evrow">
-          <div class="evdate">05&ndash;07 Oct</div>
+          <div class="evbody">US NFP / Employment Situation (Sep 2026)</div>
+        </div><div class="evrow">
+          <div class="evdate">5 Oct</div>
           <span class="evtag mpc">RBI MPC</span>
-          <div class="evbody">MPC meets Oct 5&ndash;7; repo decision Oct 7 (currently 5.25%, unchanged)</div>
-        </div>
-        <div class="evrow">
-          <div class="evdate">12 Oct Mon</div>
-          <span class="evtag macro">India Macro</span>
-          <div class="evbody">India CPI (Sep) + IIP (Aug), approx. date</div>
-        </div>
-        <div class="evrow">
-          <div class="evdate">14 Oct Wed</div>
+          <div class="evbody">RBI MPC Meeting begins (Oct 5-7, 2026)</div>
+        </div><div class="evrow">
+          <div class="evdate">7 Oct</div>
+          <span class="evtag mpc">RBI MPC</span>
+          <div class="evbody">RBI MPC Decision -- Repo Rate Announcement</div>
+        </div><div class="evrow">
+          <div class="evdate">7 Oct</div>
           <span class="evtag macro">US Macro</span>
-          <div class="evbody">US CPI (Sep)</div>
-        </div>
-        <div class="evrow">
-          <div class="evdate">20 Oct Tue</div>
-          <span class="evtag hol">NSE Holiday</span>
-          <div class="evbody">Dussehra &mdash; markets closed</div>
-        </div>
-        <div class="evrow">
-          <div class="evdate">27&ndash;28 Oct</div>
-          <span class="evtag mpc">Fed FOMC</span>
-          <div class="evbody">FOMC meets; rate decision Oct 28</div>
-        </div>
-      </div>
+          <div class="evbody">Fed FOMC Minutes (Sep 15-16 meeting)</div>
+        </div><div class="evrow">
+          <div class="evdate">12 Oct</div>
+          <span class="evtag macro">India Macro</span>
+          <div class="evbody">India CPI (Sep 2026) + IIP (Aug 2026)</div>
+        </div><div class="evrow">
+          <div class="evdate">14 Oct</div>
+          <span class="evtag macro">US Macro</span>
+          <div class="evbody">US CPI (Sep 2026)</div>
+        </div><div class="evrow">
+          <div class="evdate">14 Oct</div>
+          <span class="evtag macro">India Macro</span>
+          <div class="evbody">India WPI (Sep 2026) [APPROX]</div>
+        </div><div class="evrow">
+          <div class="evdate">15 Oct</div>
+          <span class="evtag macro">India Macro</span>
+          <div class="evbody">India Trade Data (Sep 2026) [APPROX]</div>
+        </div><div class="evrow">
+          <div class="evdate">20 Oct</div>
+          <span class="evtag hol">NSE Trading Holiday</span>
+          <div class="evbody">Dussehra (Vijaya Dashami) -- NSE/BSE CLOSED</div>
+        </div><div class="evrow">
+          <div class="evdate">20 Oct</div>
+          <span class="evtag hol">Public Holiday</span>
+          <div class="evbody">Dussehra -- Public Holiday</div>
+        </div></div>
 
       <h2 style="margin-top:6px;">Recent SEBI / RBI Circulars</h2>
-      <div class="subline" style="margin-bottom:2px;">Dates below are corrected as of 18 Sep after checking each source directly &mdash; all 4 turned out older than a true trailing 7 days; kept here since they're still live/relevant.</div>
-      <div>
-        <div class="circ">
+      <div class="subline" style="margin-bottom:2px;">None of these fall inside a true trailing 7 days as of today &mdash; kept here since they're still live/relevant.</div>
+      <div><div class="circ">
+          <span class="src">SEBI &mdash; 3 Sep</span>
+          <span>SEBI proposed net settlement framework for eligible mutual fund cash-market transactions to reduce settlement risk. <a href="https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes&amp;search=Settlement" target="_blank" rel="noopener">Read &rarr;</a> <span style="color:var(--amber);">(exact document link unverified)</span></span>
+        </div><div class="circ">
           <span class="src">SEBI &mdash; 28 Aug</span>
-          <span>ETF base price / price band / close-out norms now effective (final extension from Jun 15 circular). <a href="https://www.sebi.gov.in/legal/circulars/aug-2026/extension-of-timeline-for-implementation-of-provisions-of-sebi-circular-dated-june-15-2026-on-norms-for-base-price-price-bands-call-auction-in-pre-open-session-and-close-out-procedure-for-exchange-_104094.html" target="_blank" rel="noopener">Read circular &rarr;</a></span>
-        </div>
-        <div class="circ">
-          <span class="src">SEBI &mdash; 03 Sep</span>
-          <span>Proposed net settlement framework for eligible MF cash-market transactions, to cut settlement risk. <a href="https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes&search=Settlement" target="_blank" rel="noopener">Search on sebi.gov.in &rarr;</a> <span style="color:var(--amber);">(exact document link unverified)</span></span>
-        </div>
-        <div class="circ">
+          <span>SEBI extended ETF base price, price band and close-out norms implementation deadline; provisions from Jun 15 circular now effective Sep 7, 2026. <a href="https://www.sebi.gov.in/legal/circulars/aug-2026/extension-of-timeline-for-implementation-of-provisions-of-sebi-circular-dated-june-15-2026-on-norms-for-base-price-price-bands-call-auction-in-pre-open-session-and-close-out-procedure-for-exchange-_104094.html" target="_blank" rel="noopener">Read &rarr;</a></span>
+        </div><div class="circ">
           <span class="src">RBI &mdash; 12 Aug</span>
-          <span>Draft Interest Rates on Loans and Advances Directions 2026 &mdash; consolidates six RE circulars into one rulebook, comments invited. <a href="https://rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63355" target="_blank" rel="noopener">Read press release &rarr;</a></span>
-        </div>
-        <div class="circ">
-          <span class="src">SEBI &mdash; 29 May</span>
-          <span>Revamped nomination norms for demat accounts and MF folios, effective Sep 1 &mdash; now mandatory for new single-holder accounts. <a href="https://www.sebi.gov.in/legal/circulars/may-2026/ease-of-doing-investments-modified-norms-for-nomination-in-demat-accounts-and-mutual-fund-folios_101703.html" target="_blank" rel="noopener">Read circular &rarr;</a></span>
-        </div>
-      </div>
+          <span>RBI issued draft Directions consolidating six separate RE-specific circulars on loan interest rates into one harmonised rulebook -- comments invited. <a href="https://rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63355" target="_blank" rel="noopener">Read &rarr;</a></span>
+        </div><div class="circ">
+          <span class="src">RBI &mdash; 14 Jul</span>
+          <span>RBI issued Governance Amendment Directions for Commercial, Small Finance, Payments and Local Area Banks -- effective Oct 1, 2026. <a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx" target="_blank" rel="noopener">Read &rarr;</a></span>
+        </div></div>
     </div>
 
   </div>
 
-  <footer>Snapshot, not live &mdash; ask Ashish's assistant to refresh after the next session and this page redeploys to the same link.</footer>
+  <footer>Auto-updated daily by Ashish's assistant &mdash; option-trading-analyst agent + option-trading-view skill.</footer>
 </div>
 
 <script>
 (function(){
-  var OC_DATA = {"spot":23346.4,"as_of":"2026-09-18","expiries":{"2026-09-22":{"tag":"weekly","pcr":1.06,"totalCE":146220360,"totalPE":154946350,"rows":[[21850.0,0,0,438685,-19045],[21900.0,0,0,1921465,-682500],[21950.0,0,0,513890,-35880],[22000.0,22490,1560,10741510,-175955],[22050.0,325,0,717925,122915],[22100.0,1170,0,2368275,466765],[22150.0,260,0,1149135,499590],[22200.0,2665,0,5006950,1208675],[22250.0,520,0,1024660,248300],[22300.0,8385,-390,5147740,694070],[22350.0,715,325,1645280,-74165],[22400.0,2470,-325,4242420,1065740],[22450.0,455,0,1949740,1073150],[22500.0,84045,-6435,9022520,646360],[22550.0,2730,65,1807845,731900],[22600.0,40755,-3185,5245435,584155],[22650.0,16965,260,1745315,-470795],[22700.0,52520,-6890,6306950,295490],[22750.0,34385,1820,4104555,2020590],[22800.0,119275,15795,7208240,1826240],[22850.0,52910,-4680,3170115,1368575],[22900.0,136565,11375,4972825,1380665],[22950.0,87490,17030,3692390,1281670],[23000.0,621790,-284310,10994165,1341470],[23050.0,154050,-23660,2870595,-267410],[23100.0,594425,-228345,6429865,1068340],[23150.0,349635,-158275,3903380,882570],[23200.0,2665520,-661440,9601865,902850],[23250.0,1811745,-1272635,6490705,1823510],[23300.0,7419685,815165,12686570,5893550],[23350.0,4955600,1473875,5143060,3557385],[23400.0,8768240,2245100,4787315,1807455],[23450.0,3859895,382655,696605,83200],[23500.0,9226165,242190,2405260,153790],[23550.0,3655340,402220,262535,-19825],[23600.0,7909005,1241500,739765,-10335],[23650.0,4041700,964600,196560,-30810],[23700.0,9495720,1934465,536770,-171405],[23750.0,4303715,501865,101660,-6890],[23800.0,8214375,-153465,458770,-25610],[23850.0,2976675,158860,72670,3315],[23900.0,5844280,-960440,436865,-14365],[23950.0,2368145,253240,75010,-2990],[24000.0,11558560,1248715,921505,-122395],[24050.0,1801475,-12220,24050,-390],[24100.0,5163795,1682070,138060,-4160],[24150.0,2433210,626925,24115,-1105],[24200.0,6358625,949715,166790,-11375],[24250.0,1300650,-223795,24635,-585],[24300.0,4095000,286715,94250,-2990],[24350.0,1200095,162240,14625,1300],[24400.0,2863510,209235,113230,-3705],[24450.0,632255,71305,12350,-65],[24500.0,10050300,-399685,274950,-14820],[24550.0,910065,53365,23855,-1495],[24600.0,2319980,140920,46150,-1170],[24650.0,415935,4940,5070,-325],[24700.0,2274870,-140075,5785,-585],[24750.0,189865,53495,0,0],[24800.0,2749370,486395,23075,-650]]},"2026-09-29":{"tag":"weekly_monthly","pcr":1.01,"totalCE":72972835,"totalPE":73687340,"rows":[[21850.0,65,0,50960,-18785],[21900.0,585,0,367120,32500],[21950.0,130,0,185965,-13260],[22000.0,784095,-13000,4009980,197665],[22050.0,65,0,180635,-17160],[22100.0,1040,0,410800,69030],[22150.0,390,0,134680,67535],[22200.0,1300,0,1129765,452075],[22250.0,325,0,244335,130585],[22300.0,1495,0,781365,135590],[22350.0,130,0,163540,30420],[22400.0,520,130,1464125,746330],[22450.0,65,0,283855,104130],[22500.0,590655,-715,4601870,711295],[22550.0,520,0,337870,60775],[22600.0,3575,260,1392625,261625],[22650.0,43875,0,265330,62985],[22700.0,21710,-585,1794780,563160],[22750.0,4355,-910,319215,42640],[22800.0,297375,-5005,2044965,198315],[22850.0,6825,2015,402675,160550],[22900.0,133380,1300,1555970,206895],[22950.0,11245,1300,427700,130130],[23000.0,1251445,-42315,7245435,256465],[23050.0,22880,260,734110,393965],[23100.0,306930,5525,1583790,48815],[23150.0,160225,-136110,645060,91650],[23200.0,1612195,106860,3150420,-117845],[23250.0,903760,142870,1231880,25740],[23300.0,4443335,921440,5337020,1089725],[23350.0,649935,237185,482365,239590],[23400.0,3109080,609570,2431650,358085],[23450.0,556530,156585,195650,18525],[23500.0,5020145,409305,4574765,14365],[23550.0,502385,145600,135720,-2860],[23600.0,2516020,167895,1370005,-42250],[23650.0,633165,124670,202800,-6630],[23700.0,2703090,975,1025570,-7475],[23750.0,957190,435825,136240,2470],[23800.0,4392505,275470,1674465,-33410],[23850.0,631020,231205,79170,-2730],[23900.0,4274595,845065,978965,36075],[23950.0,528775,-2210,118820,5460],[24000.0,10381280,467090,5434790,-112060],[24050.0,486655,40235,90025,1820],[24100.0,2026310,58955,771745,-19890],[24150.0,658970,130975,158210,-715],[24200.0,3489005,-107510,1713660,-7930],[24250.0,537680,17745,158275,-65],[24300.0,4495985,-299065,2952885,-1820],[24350.0,494455,-43485,314275,-1885],[24400.0,3063190,178295,1908140,-7345],[24450.0,325910,-34710,80145,-780],[24500.0,5496465,-147030,2897115,-15600],[24550.0,296205,-8580,45695,-1105],[24600.0,1207700,-77610,661050,-5330],[24650.0,176995,21190,34840,-1365],[24700.0,1505400,102895,218335,-2600],[24750.0,212615,-37505,26845,-845],[24800.0,1039090,-20280,337285,-3185]]},"2026-10-06":{"tag":"weekly","pcr":0.61,"totalCE":4145830,"totalPE":2535455,"rows":[[21850.0,0,0,845,0],[21900.0,0,0,19240,3510],[21950.0,0,0,4810,780],[22000.0,260,0,176150,69810],[22050.0,0,0,4095,1950],[22100.0,0,0,36660,16900],[22150.0,0,0,3250,520],[22200.0,0,0,64285,14105],[22250.0,0,0,8190,4745],[22300.0,0,0,55250,25935],[22350.0,0,0,8645,2860],[22400.0,0,0,46410,25870],[22450.0,0,0,14300,1495],[22500.0,455,390,216060,51740],[22550.0,325,0,9815,1040],[22600.0,130,0,111865,18330],[22650.0,0,0,6760,1690],[22700.0,195,0,64740,21775],[22750.0,260,65,24895,7800],[22800.0,2145,390,108225,39390],[22850.0,390,65,28600,10400],[22900.0,2470,195,102570,41275],[22950.0,2405,260,24570,-390],[23000.0,40365,2405,324805,39520],[23050.0,2730,325,28665,9880],[23100.0,8840,1105,98670,62660],[23150.0,7995,1950,22750,12025],[23200.0,95810,12415,128765,11830],[23250.0,25935,0,31915,-1560],[23300.0,186160,69095,225940,58825],[23350.0,34970,21580,48815,24765],[23400.0,227305,142675,170690,103805],[23450.0,34385,-27040,8710,2795],[23500.0,329225,70785,174460,49920],[23550.0,34125,6955,6500,1300],[23600.0,129935,49400,33280,11700],[23650.0,26065,4030,6825,5070],[23700.0,168025,86450,22035,5005],[23750.0,31655,15795,2275,195],[23800.0,245635,110565,16250,2795],[23850.0,35620,12545,4290,65],[23900.0,173940,51025,2145,-130],[23950.0,46085,8190,1690,0],[24000.0,1155570,359125,31785,7280],[24050.0,32500,13455,195,0],[24100.0,218335,76310,1625,910],[24150.0,23270,9230,0,0],[24200.0,161135,51480,260,0],[24250.0,23140,6500,65,0],[24300.0,146705,44850,130,0],[24350.0,0,0,0,0],[24400.0,108355,46995,0,0],[24450.0,0,0,0,0],[24500.0,273780,49920,1690,195],[24550.0,0,0,0,0],[24600.0,59475,4680,0,0],[24650.0,1105,0,0,0],[24700.0,22815,11440,0,0],[24750.0,2665,65,0,0],[24800.0,23140,13910,0,0]]},"2026-10-27":{"tag":"monthly_next","pcr":1.22,"totalCE":13660920,"totalPE":16640650,"rows":[[21850.0,0,0,4095,455],[21900.0,0,0,61230,13065],[21950.0,0,0,9880,2730],[22000.0,106405,-195,1156480,290745],[22050.0,0,0,8775,1495],[22100.0,0,0,59670,2665],[22150.0,4810,0,10725,-4355],[22200.0,2730,0,118365,21190],[22250.0,13130,0,486460,-5005],[22300.0,130,0,418990,64220],[22350.0,0,0,18850,-715],[22400.0,0,0,177125,25740],[22450.0,0,0,32825,1235],[22500.0,157885,3770,1902290,101985],[22550.0,1690,65,28860,5590],[22600.0,1690,0,237770,-4875],[22650.0,1105,0,22425,5070],[22700.0,3185,260,417040,77805],[22750.0,1105,195,18460,2795],[22800.0,22360,10010,357045,31460],[22850.0,390,0,29965,2665],[22900.0,9945,3120,243425,59670],[22950.0,650,0,19890,-195],[23000.0,434265,12480,2229890,42315],[23050.0,1885,-260,24375,6825],[23100.0,33865,1040,273325,34580],[23150.0,3770,650,29250,0],[23200.0,137475,-18005,457145,20670],[23250.0,21515,-1625,36335,-3250],[23300.0,548535,41990,815555,45565],[23350.0,26065,11050,113100,79885],[23400.0,259545,36985,381030,57135],[23450.0,19370,-585,63115,5070],[23500.0,1287455,137215,1667900,53170],[23550.0,15990,1170,20865,4095],[23600.0,320255,2600,234130,18980],[23650.0,27625,-780,30290,650],[23700.0,363090,50115,317005,4485],[23750.0,27885,520,11440,455],[23800.0,739960,19955,494715,22620],[23850.0,41925,3640,9230,-130],[23900.0,400985,63700,176735,520],[23950.0,77350,47125,6370,0],[24000.0,2896790,497510,1534195,-20605],[24050.0,82940,54795,5785,0],[24100.0,566345,142610,201305,9880],[24150.0,105625,72150,15730,0],[24200.0,764530,161590,213915,-1885],[24250.0,88530,38870,12350,130],[24300.0,507585,75465,136760,1430],[24350.0,44395,130,11960,0],[24400.0,373360,10270,113815,-2925],[24450.0,41210,-1690,11570,0],[24500.0,1997515,200395,754260,24180],[24550.0,44980,1300,7280,0],[24600.0,342615,2145,92625,585],[24650.0,24245,-1365,3705,0],[24700.0,252720,195,124605,1690],[24750.0,25025,845,1300,0],[24800.0,386490,36140,167050,390]]}}};
+  var OC_DATA = {"spot": 23414.3, "as_of": "2026-09-21", "expiries": {"2026-09-22": {"tag": "weekly", "pcr": 1.46, "totalCE": 150202650, "totalPE": 219991720, "rows": [[21350.0, 0, 0, 4662970, -1669200], [21400.0, 0, 0, 2902380, -801645], [21450.0, 0, 0, 703625, 77740], [21500.0, 0, 0, 3211715, -1407770], [21550.0, 0, 0, 337545, 90935], [21600.0, 0, 0, 443300, -54275], [21650.0, 0, 0, 631670, -305110], [21700.0, 1560, 0, 1737710, -1135745], [21750.0, 0, 0, 355355, -26715], [21800.0, 65, 0, 2220530, -868140], [21850.0, 0, 0, 477750, 39065], [21900.0, 0, 0, 1533155, -388310], [21950.0, 0, 0, 520260, 6370], [22000.0, 19370, -3120, 9932585, -808925], [22050.0, 325, 0, 388635, -329290], [22100.0, 1170, 0, 1948765, -419510], [22150.0, 260, 0, 949065, -200070], [22200.0, 2600, -65, 4466930, -540020], [22250.0, 520, 0, 1292980, 268320], [22300.0, 7410, -975, 4316455, -831285], [22350.0, 715, 0, 1835145, 189865], [22400.0, 2470, 0, 4944810, 702390], [22450.0, 455, 0, 2771080, 821340], [22500.0, 58435, -25610, 12475710, 3453190], [22550.0, 2730, 0, 1970410, 162565], [22600.0, 37375, -3380, 5757570, 512135], [22650.0, 17030, 65, 2258295, 512980], [22700.0, 53300, 780, 7307170, 1000220], [22750.0, 32890, -1495, 2679560, -1424995], [22800.0, 83070, -36205, 8915790, 1707550], [22850.0, 48165, -4745, 2650245, -519870], [22900.0, 125320, -11245, 8676460, 3703635], [22950.0, 85410, -2080, 4385225, 692835], [23000.0, 420550, -201240, 12333035, 1338870], [23050.0, 148915, -5135, 4757415, 1886820], [23100.0, 482820, -111605, 9414665, 2984800], [23150.0, 250770, -98865, 6188455, 2285075], [23200.0, 2056145, -609375, 11239020, 1637155], [23250.0, 1252095, -559650, 7922005, 1431300], [23300.0, 3889340, -3530345, 15827240, 3140670], [23350.0, 2567695, -2387905, 10091640, 4948580], [23400.0, 8603270, -164970, 16079830, 11292515], [23450.0, 6430060, 2570165, 6357650, 5661045], [23500.0, 11625445, 2399280, 5052580, 2647320], [23550.0, 6234865, 2579525, 856895, 594360], [23600.0, 10709140, 2800135, 1206725, 466960], [23650.0, 7765485, 3723785, 239330, 42770], [23700.0, 9435075, -60645, 582660, 45890], [23750.0, 5202860, 899145, 85670, -15990], [23800.0, 8226075, 11700, 349570, -109200], [23850.0, 3581175, 604500, 66430, -6240], [23900.0, 6374485, 530205, 229775, -207090], [23950.0, 1433705, -934440, 65910, -9100], [24000.0, 9100325, -2458235, 737750, -183755], [24050.0, 1938690, 137215, 21645, -2405], [24100.0, 4345055, -818740, 100425, -37635], [24150.0, 1284855, -1148355, 19760, -4355], [24200.0, 6623890, 265265, 91780, -75010], [24250.0, 1706510, 405860, 21710, -2925], [24300.0, 3417960, -677040, 49270, -44980], [24350.0, 1106300, -93795, 10335, -4290], [24400.0, 2412735, -450775, 52390, -60840], [24450.0, 603915, -28340, 8255, -4095], [24500.0, 7131345, -2918955, 116090, -158860], [24550.0, 883805, -26260, 10465, -13390], [24600.0, 1532765, -787215, 26325, -19825], [24650.0, 218530, -197405, 1885, -3185], [24700.0, 893880, -1380990, 4290, -1495], [24750.0, 154960, -34905, 0, 0], [24800.0, 2170285, -579085, 6500, -16575], [24850.0, 279500, -234195, 0, 0], [24900.0, 474500, -645385, 9295, -195], [24950.0, 134550, -65130, 0, 0], [25000.0, 2363205, -2081950, 34775, -31005], [25050.0, 93925, -83070, 65, 0], [25100.0, 293995, -582595, 780, -260], [25150.0, 137215, -54080, 325, 0], [25200.0, 255125, -96330, 2275, -1625], [25250.0, 108745, -52780, 520, 0], [25300.0, 165945, -9880, 520, -65], [25350.0, 28925, 9945, 0, 0], [25400.0, 110825, -56160, 1755, -260], [25450.0, 21645, 0, 520, 0], [25500.0, 560300, -352105, 24180, -32370], [25550.0, 27820, 1820, 130, 65], [25600.0, 84695, -39520, 195, 0], [25650.0, 26910, -715, 520, 0], [25700.0, 133185, -39390, 0, 0], [25750.0, 40235, -8190, 0, 0], [25800.0, 612170, -253045, 325, -130], [25850.0, 39455, 2795, 0, 0], [25900.0, 101790, -36400, 0, 0], [25950.0, 39975, 12610, 0, 0], [26000.0, 716950, -731445, 29315, -39390], [26050.0, 79300, -8580, 0, 0], [26100.0, 475345, -124865, 0, 0]]}, "2026-09-29": {"tag": "monthly", "pcr": 0.94, "totalCE": 114176185, "totalPE": 107261055, "rows": [[15000.0, 0, 0, 101725, 7280], [16500.0, 0, 0, 130455, 0], [18000.0, 845, -65, 810420, -4550], [19500.0, 139230, -1235, 1056965, 27690], [21000.0, 503035, -7020, 6166810, 2474550], [21350.0, 0, 0, 115765, 49205], [21400.0, 65, 65, 315705, 111930], [21450.0, 0, 0, 22945, 14755], [21500.0, 0, 0, 1902160, 823355], [21550.0, 0, 0, 19305, 9230], [21600.0, 44330, -2080, 902850, -49855], [21650.0, 65, 0, 29120, -17615], [21700.0, 0, 0, 728130, 70590], [21750.0, 65, 0, 47645, 6890], [21800.0, 65, 0, 993850, 51285], [21850.0, 65, 0, 42315, -8645], [21900.0, 585, 0, 525135, 158015], [21950.0, 130, 0, 182455, -3510], [22000.0, 762515, -21580, 4801095, 791115], [22050.0, 65, 0, 175240, -5395], [22100.0, 1040, 0, 513370, 102570], [22150.0, 390, 0, 116220, -18460], [22200.0, 1300, 0, 1608750, 478985], [22250.0, 325, 0, 181480, -62855], [22300.0, 1430, -65, 1133145, 351780], [22350.0, 130, 0, 211770, 48230], [22400.0, 455, -65, 2220335, 756210], [22450.0, 195, 130, 402350, 118495], [22500.0, 573430, -17225, 5460000, 858130], [22550.0, 520, 0, 435110, 97240], [22600.0, 3965, 390, 1734265, 341640], [22650.0, 44135, 260, 403520, 138190], [22700.0, 26975, 5265, 1880060, 85280], [22750.0, 3315, -1040, 665470, 346255], [22800.0, 270335, -27040, 2804165, 759200], [22850.0, 7215, 390, 549965, 147290], [22900.0, 109460, -23920, 2103205, 547235], [22950.0, 9100, -2145, 642655, 214955], [23000.0, 1356745, 105300, 8455980, 1210545], [23050.0, 24570, 1690, 605020, -129090], [23100.0, 312910, 5980, 2348710, 764920], [23150.0, 142935, -17290, 1068665, 423605], [23200.0, 1449500, -162695, 3420755, 270335], [23250.0, 816335, -87425, 1115075, -116805], [23300.0, 4075045, -368290, 5572320, 235300], [23350.0, 692965, 43030, 801905, 319540], [23400.0, 4008485, 899405, 3885960, 1454310], [23450.0, 938665, 382135, 715195, 519545], [23500.0, 5642065, 621920, 4941170, 366405], [23550.0, 740090, 237705, 206180, 70460], [23600.0, 2860585, 344565, 1444690, 74685], [23650.0, 1025310, 392145, 249730, 46930], [23700.0, 3445520, 742430, 1062165, 36595], [23750.0, 1574755, 617565, 211315, 75075], [23800.0, 5171335, 778830, 1624155, -50310], [23850.0, 1147445, 516425, 99060, 19890], [23900.0, 4952025, 677430, 1131715, 152750], [23950.0, 969995, 441220, 121940, 3120], [24000.0, 11614980, 1233700, 5513050, 78260], [24050.0, 749320, 262665, 90805, 780], [24100.0, 2522390, 496080, 742170, -29575], [24150.0, 691015, 32045, 131560, -26650], [24200.0, 4877795, 1388790, 1636635, -77025], [24250.0, 567255, 29575, 161525, 3250], [24300.0, 4717635, 221650, 2849990, -102895], [24350.0, 555165, 60710, 309920, -4355], [24400.0, 3229980, 166790, 1893385, -14755], [24450.0, 314015, -11895, 79235, -910], [24500.0, 6152770, 656305, 2766465, -130650], [24550.0, 276965, -19240, 47125, 1430], [24600.0, 1621100, 413400, 660465, -585], [24650.0, 248820, 71825, 34775, -65], [24700.0, 2773810, 1268410, 222820, 4485], [24750.0, 226460, 13845, 26650, -195], [24800.0, 2729415, 1690325, 334295, -2990], [24850.0, 132080, -122330, 13390, -130], [24900.0, 2166060, 1558960, 75075, -715], [24950.0, 87035, -23205, 4745, 0], [25000.0, 9703330, 4317495, 1869980, -67015], [25050.0, 84370, 5915, 3835, 0], [25100.0, 929760, 382460, 96005, -1625], [25150.0, 60580, 19045, 1365, 0], [25200.0, 708370, 159770, 77545, -1430], [25250.0, 58695, 13975, 1690, 0], [25300.0, 708825, -22815, 28990, -130], [25350.0, 18005, -650, 1040, 0], [25400.0, 559195, 2015, 22360, -3120], [25450.0, 40950, 520, 585, -130], [25500.0, 3223935, 24895, 1427010, -5525], [25550.0, 43095, 3575, 390, 0], [25600.0, 135915, -5330, 29640, -845], [25650.0, 51090, -4095, 65, 0], [25700.0, 202540, -13390, 11960, 0], [25750.0, 8385, 390, 455, 0], [25800.0, 405665, 107510, 21125, 260], [25850.0, 10920, 2990, 0, 0], [25900.0, 30550, -4615, 4550, -130], [25950.0, 9035, -455, 65, 0], [26000.0, 3214810, -49790, 1885750, -11115], [26050.0, 8385, -195, 260, 0], [26100.0, 12155, -1170, 9360, 0], [26150.0, 8645, 2470, 65, 0], [26200.0, 140660, -14430, 36985, 0], [26250.0, 11635, 9685, 0, 0], [26300.0, 119535, -7540, 74815, -4615], [26350.0, 1755, -325, 0, 0], [26400.0, 19565, 1300, 2990, -390], [26450.0, 2730, 0, 0, 0], [26500.0, 871260, 27755, 827515, -4940], [26550.0, 4485, 130, 0, 0], [26600.0, 34645, -2145, 0, 0], [26650.0, 1105, 0, 0, 0], [26700.0, 4225, 1560, 0, 0], [26750.0, 6955, 1300, 65, 0], [26800.0, 2275, 0, 1365, 0], [26850.0, 3380, 0, 0, 0], [26900.0, 5525, -390, 65, 0], [26950.0, 2795, 0, 0, 0], [27000.0, 1660230, -28535, 1476310, -15600], [27050.0, 10920, 0, 0, 0], [27100.0, 13000, -715, 0, 0], [27150.0, 8320, -65, 0, 0], [27200.0, 80665, -1495, 0, 0], [28500.0, 504075, -8775, 400205, -15405], [30000.0, 262475, -6345, 134940, -1495], [31500.0, 16055, 130, 0, 0], [33000.0, 34775, 1885, 0, 0], [34500.0, 9815, 0, 0, 0]]}, "2026-10-06": {"tag": "weekly", "pcr": 0.7, "totalCE": 6352970, "totalPE": 4469660, "rows": [[21350.0, 0, 0, 37245, 36335], [21400.0, 0, 0, 13585, 9685], [21450.0, 0, 0, 0, 0], [21500.0, 0, 0, 147420, 122135], [21550.0, 0, 0, 390, 390], [21600.0, 0, 0, 14235, -1105], [21650.0, 0, 0, 0, 0], [21700.0, 0, 0, 4095, 2600], [21750.0, 0, 0, 65, 0], [21800.0, 0, 0, 26390, -5200], [21850.0, 0, 0, 845, 0], [21900.0, 0, 0, 18330, -910], [21950.0, 0, 0, 3835, -975], [22000.0, 9490, 9230, 194805, 18655], [22050.0, 0, 0, 4160, 65], [22100.0, 0, 0, 42640, 5980], [22150.0, 0, 0, 3965, 715], [22200.0, 0, 0, 144105, 79820], [22250.0, 0, 0, 8320, 130], [22300.0, 0, 0, 80990, 25740], [22350.0, 0, 0, 14430, 5785], [22400.0, 0, 0, 73385, 26975], [22450.0, 0, 0, 19695, 5395], [22500.0, 11050, 10595, 357110, 141050], [22550.0, 325, 0, 18525, 8710], [22600.0, 0, -130, 169910, 58045], [22650.0, 0, 0, 22555, 15795], [22700.0, 195, 0, 109200, 44460], [22750.0, 260, 0, 26845, 1950], [22800.0, 1885, -260, 169975, 61750], [22850.0, 455, 65, 31915, 3315], [22900.0, 9490, 7020, 185250, 82680], [22950.0, 2405, 0, 36595, 12025], [23000.0, 111995, 71630, 573040, 248235], [23050.0, 2730, 0, 38220, 9555], [23100.0, 15145, 6305, 125840, 27170], [23150.0, 7735, -260, 60125, 37375], [23200.0, 93535, -2275, 178100, 49335], [23250.0, 23465, -2470, 54275, 22360], [23300.0, 192595, 6435, 275600, 49660], [23350.0, 35685, 715, 53430, 4615], [23400.0, 336635, 109330, 312325, 141635], [23450.0, 103610, 69225, 36595, 27885], [23500.0, 623220, 293995, 498160, 323700], [23550.0, 48360, 14235, 11700, 5200], [23600.0, 207870, 77935, 104650, 71370], [23650.0, 62595, 36530, 8060, 1235], [23700.0, 298675, 130650, 37375, 15340], [23750.0, 56745, 25090, 12675, 10400], [23800.0, 338585, 92950, 22425, 6175], [23850.0, 76830, 41210, 4290, 0], [23900.0, 276250, 102310, 4680, 2535], [23950.0, 61035, 14950, 1560, -130], [24000.0, 1376570, 221000, 44915, 13130], [24050.0, 54990, 22490, 325, 130], [24100.0, 295360, 77025, 2665, 1040], [24150.0, 57655, 34385, 0, 0], [24200.0, 278070, 116935, 260, 0], [24250.0, 47320, 24180, 3250, 3185], [24300.0, 236405, 89700, 3380, 3250], [24350.0, 0, 0, 0, 0], [24400.0, 124280, 15925, 130, 130], [24450.0, 0, 0, 0, 0], [24500.0, 361270, 87490, 6305, 4615], [24550.0, 0, 0, 0, 0], [24600.0, 132210, 72735, 0, 0], [24650.0, 1105, 0, 0, 0], [24700.0, 32045, 9230, 0, 0], [24750.0, 2665, 0, 0, 0], [24800.0, 29380, 6240, 0, 0], [24850.0, 1105, -65, 0, 0], [24900.0, 15015, -65, 0, 0], [24950.0, 1430, -130, 65, 0], [25000.0, 137800, 36400, 4680, 4485], [25050.0, 1495, 130, 0, 0], [25100.0, 1300, -130, 0, 0], [25150.0, 1495, -260, 0, 0], [25200.0, 3380, 390, 0, 0], [25250.0, 2340, -65, 0, 0], [25300.0, 8450, -325, 0, 0], [25350.0, 1560, -390, 0, 0], [25400.0, 2210, -585, 0, 0], [25450.0, 780, -130, 0, 0], [25500.0, 60580, 14690, 9750, 9750], [25550.0, 1365, -1300, 0, 0], [25600.0, 2990, 455, 0, 0], [25650.0, 3705, 65, 0, 0], [25700.0, 7995, 2470, 0, 0], [25750.0, 2470, 0, 0, 0], [25800.0, 57330, 2990, 0, 0]]}, "2026-10-13": {"tag": "weekly", "pcr": 0.74, "totalCE": 1271270, "totalPE": 937495, "rows": [[21350.0, 0, 0, 0, 0], [21400.0, 0, 0, 0, 0], [21450.0, 0, 0, 0, 0], [21500.0, 0, 0, 1365, 455], [21550.0, 0, 0, 0, 0], [21600.0, 0, 0, 0, 0], [21650.0, 0, 0, 195, 0], [21700.0, 0, 0, 0, 0], [21750.0, 0, 0, 0, 0], [21800.0, 0, 0, 17420, 715], [21850.0, 0, 0, 0, 0], [21900.0, 0, 0, 195, 0], [21950.0, 0, 0, 390, 0], [22000.0, 0, 0, 74880, 22490], [22050.0, 0, 0, 4680, 1820], [22100.0, 0, 0, 5785, 2795], [22150.0, 0, 0, 5005, 0], [22200.0, 0, 0, 30420, -2730], [22250.0, 0, 0, 5980, 585], [22300.0, 0, 0, 46085, 2925], [22350.0, 0, 0, 8905, -195], [22400.0, 0, 0, 33930, -260], [22450.0, 0, 0, 5850, 1495], [22500.0, 65, 65, 89440, 16315], [22550.0, 0, 0, 6695, 2210], [22600.0, 0, 0, 15275, 5785], [22650.0, 0, 0, 1560, 0], [22700.0, 0, 0, 93145, 84370], [22750.0, 0, 0, 2730, 910], [22800.0, 260, 0, 53690, 24180], [22850.0, 0, 0, 4225, 585], [22900.0, 325, 0, 16965, 9685], [22950.0, 0, 0, 11635, 6955], [23000.0, 8905, 455, 86125, 41145], [23050.0, 65, 0, 17810, 13130], [23100.0, 1820, 0, 17810, 7345], [23150.0, 2535, 0, 5785, 1625], [23200.0, 10660, 520, 29705, 6760], [23250.0, 5915, -260, 8255, 715], [23300.0, 19890, -1560, 23660, 7670], [23350.0, 11180, -1755, 16900, 6630], [23400.0, 30615, 10530, 48230, 34125], [23450.0, 8515, 2145, 8645, 1235], [23500.0, 147615, 80405, 104910, 52845], [23550.0, 6825, 520, 5915, 260], [23600.0, 28145, 5655, 8125, 3705], [23650.0, 12155, 4095, 3640, 260], [23700.0, 46735, 13650, 3055, 520], [23750.0, 16770, 520, 1885, 0], [23800.0, 81445, 19500, 5460, 650], [23850.0, 26000, 5005, 1625, 0], [23900.0, 0, 0, 715, -65], [23950.0, 0, 0, 0, 0], [24000.0, 204685, 81185, 2275, -65], [24050.0, 13715, 2145, 0, 0], [24100.0, 0, 0, 0, 0], [24150.0, 0, 0, 65, 65], [24200.0, 339105, 185900, 0, 0], [24250.0, 6760, 130, 0, 0], [24300.0, 46150, 25415, 260, 0], [24350.0, 0, 0, 0, 0], [24400.0, 65, 0, 0, 0], [24450.0, 0, 0, 0, 0], [24500.0, 122850, 47840, 65, 0], [24550.0, 0, 0, 0, 0], [24600.0, 0, 0, 65, 0], [24650.0, 0, 0, 0, 0], [24700.0, 0, 0, 0, 0], [24750.0, 0, 0, 0, 0], [24800.0, 25935, 910, 0, 0], [24850.0, 0, 0, 65, 0], [24900.0, 0, 0, 0, 0], [24950.0, 2405, 1690, 0, 0], [25000.0, 26845, 12480, 0, 0], [25050.0, 780, -780, 0, 0], [25100.0, 520, -910, 0, 0], [25150.0, 1105, 0, 0, 0], [25200.0, 1430, -325, 0, 0], [25250.0, 1300, 0, 0, 0], [25300.0, 1365, 0, 0, 0], [25350.0, 715, -520, 0, 0], [25400.0, 9100, 715, 0, 0]]}}};
 
-  var TAB_META = {
-    "CUMULATIVE": {label:"All Expiries", sub:"Cumulative"},
-    "2026-09-22": {label:"22 Sep", sub:"Weekly"},
-    "2026-09-29": {label:"29 Sep", sub:"Monthly (Sep)"},
-    "2026-10-06": {label:"06 Oct", sub:"Weekly"},
-    "2026-10-27": {label:"27 Oct", sub:"Monthly (Oct)"}
-  };
-  var ORDER = ["CUMULATIVE","2026-09-22","2026-09-29","2026-10-06","2026-10-27"];
+  var TAB_META = {"CUMULATIVE": {"label": "All Expiries", "sub": "Cumulative"}, "2026-09-22": {"label": "22 Sep", "sub": "Weekly"}, "2026-09-29": {"label": "29 Sep", "sub": "Monthly"}, "2026-10-06": {"label": "6 Oct", "sub": "Weekly"}, "2026-10-13": {"label": "13 Oct", "sub": "Weekly"}};
+  var ORDER = ["CUMULATIVE", "2026-09-22", "2026-09-29", "2026-10-06", "2026-10-13"];
 
-  // Build the cumulative (all-expiries) book. All 4 expiries share the same
-  // strike grid (21850-24800 @ 50pt) so a plain per-index sum lines up.
   (function buildCumulative(){
-    var keys = ["2026-09-22","2026-09-29","2026-10-06","2026-10-27"];
+    var keys = ORDER.filter(function(k){ return k !== "CUMULATIVE"; });
+    if (!keys.length) return;
     var base = OC_DATA.expiries[keys[0]].rows;
     var rows = base.map(function(r){ return [r[0], 0, 0, 0, 0]; });
     keys.forEach(function(k){
       OC_DATA.expiries[k].rows.forEach(function(r, i){
+        if (!rows[i]) return;
         rows[i][1] += r[1]; rows[i][2] += r[2]; rows[i][3] += r[3]; rows[i][4] += r[4];
       });
     });
@@ -389,7 +376,7 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
     keys.forEach(function(k){ totalCE += OC_DATA.expiries[k].totalCE; totalPE += OC_DATA.expiries[k].totalPE; });
     OC_DATA.expiries["CUMULATIVE"] = {
       tag: "cumulative", rows: rows, totalCE: totalCE, totalPE: totalPE,
-      pcr: Math.round((totalPE/totalCE)*100)/100
+      pcr: totalCE ? Math.round((totalPE/totalCE)*100)/100 : 0
     };
   })();
 
@@ -401,7 +388,7 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
   var yAxis = document.getElementById("ocYAxis");
   var selectedIdx = null;
 
-  function fmtL(v){ // value in lakhs, short form
+  function fmtL(v){
     if (v >= 1e7) return (v/1e7).toFixed(2) + "Cr";
     if (v >= 1e5) return (v/1e5).toFixed(1) + "L";
     return v.toLocaleString("en-IN");
@@ -437,10 +424,9 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
 
   function render(expKey){
     var blk = OC_DATA.expiries[expKey];
-    var rows = blk.rows; // [strike, callOI, callChg, putOI, putChg]
+    var rows = blk.rows;
     var spot = OC_DATA.spot;
 
-    // tabs
     tabsEl.innerHTML = "";
     ORDER.forEach(function(k){
       var meta = TAB_META[k];
@@ -454,7 +440,6 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
       tabsEl.appendChild(btn);
     });
 
-    // summary
     var maxCall = rows.reduce(function(a,b){ return b[1] > a[1] ? b : a; });
     var maxPut = rows.reduce(function(a,b){ return b[3] > a[3] ? b : a; });
     summaryEl.innerHTML =
@@ -467,7 +452,6 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
 
     ruleEl.innerHTML = "Rule: Max Call OI strike (<b style='color:var(--short)'>" + fmtStrike(maxCall[0]) + "</b>) = resistance &mdash; large call writers defend it from above. Max Put OI strike (<b style='color:var(--long)'>" + fmtStrike(maxPut[0]) + "</b>) = support &mdash; large put writers defend it from below. Market expected to hold inside this band through the " + TAB_META[expKey].label + " expiry, absent a fresh writer shift.";
 
-    // chart geometry
     var groupW = 26, barW = 10, gap = 2;
     var chartH = 220, axisH = 60, topPad = 14;
     var totalH = chartH + axisH + topPad;
@@ -479,24 +463,20 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
 
     function y(v){ return topPad + chartH - (v / yMax) * chartH; }
 
-    // find spot position (nearest strike)
     var spotIdx = 0, spotDiff = Infinity;
     rows.forEach(function(r, i){ var d = Math.abs(r[0]-spot); if (d < spotDiff){ spotDiff = d; spotIdx = i; } });
     var spotX = 10 + spotIdx * groupW + groupW/2;
 
     var svgParts = [];
-    // gridlines
     var ticks = 5;
     for (var t=0; t<=ticks; t++){
       var val = yMax * t / ticks;
       var yy = y(val);
       svgParts.push('<line x1="0" y1="'+yy+'" x2="'+w+'" y2="'+yy+'" stroke="var(--border)" stroke-width="1" />');
     }
-    // spot line
     svgParts.push('<line x1="'+spotX+'" y1="'+topPad+'" x2="'+spotX+'" y2="'+(topPad+chartH)+'" stroke="var(--text)" stroke-width="1.4" stroke-dasharray="4,3" />');
     svgParts.push('<text x="'+spotX+'" y="'+(topPad-4)+'" text-anchor="middle" font-size="11" font-weight="600" fill="var(--text)">NIFTY '+spot.toLocaleString("en-IN")+'</text>');
 
-    // selection highlight (drawn first, sits behind the bars)
     if (selectedIdx !== null && selectedIdx < rows.length){
       var hgx = 10 + selectedIdx * groupW - 2;
       svgParts.push('<rect x="'+hgx+'" y="'+topPad+'" width="'+(groupW+2)+'" height="'+chartH+'" fill="var(--amber-soft)" />');
@@ -515,13 +495,11 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
       var callFill = callChg >= 0 ? "var(--short)" : "var(--surface)";
       var callStroke = "var(--short)";
 
-      // full-height invisible hit area so a short bar is still easy to tap
       svgParts.push('<rect class="oc-hit" data-idx="'+i+'" x="'+gx+'" y="'+topPad+'" width="'+(barW*2+gap)+'" height="'+chartH+'" fill="transparent" style="cursor:pointer" />');
 
       if (putH > 0.5) svgParts.push('<rect data-idx="'+i+'" x="'+putX+'" y="'+putY+'" width="'+barW+'" height="'+putH+'" fill="'+putFill+'" stroke="'+putStroke+'" stroke-width="1.3" style="cursor:pointer; pointer-events:none;"><title>Strike '+strike.toLocaleString("en-IN")+' PUT OI '+putOI.toLocaleString("en-IN")+' (chg '+(putChg>=0?"+":"")+putChg.toLocaleString("en-IN")+')</title></rect>');
       if (callH > 0.5) svgParts.push('<rect data-idx="'+i+'" x="'+callX+'" y="'+callY+'" width="'+barW+'" height="'+callH+'" fill="'+callFill+'" stroke="'+callStroke+'" stroke-width="1.3" style="cursor:pointer; pointer-events:none;"><title>Strike '+strike.toLocaleString("en-IN")+' CALL OI '+callOI.toLocaleString("en-IN")+' (chg '+(callChg>=0?"+":"")+callChg.toLocaleString("en-IN")+')</title></rect>');
 
-      // x label, rotated
       var lx = gx + barW + gap/2;
       var ly = topPad + chartH + 14;
       var isSel = selectedIdx === i;
@@ -542,7 +520,6 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
     svg.setAttribute("viewBox", "0 0 " + w + " " + totalH);
     svg.innerHTML = svgParts.join("");
 
-    // y axis (fixed, non-scrolling)
     yAxis.setAttribute("height", totalH);
     yAxis.setAttribute("viewBox", "0 0 48 " + totalH);
     var yParts = [];
