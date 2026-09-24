@@ -186,6 +186,33 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
 .oc-detail b{font-weight:600;}
 .oc-detail .strikebig{font-size:15px; font-weight:700; margin-right:6px;}
 
+.vtabs{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; position:sticky; top:0; z-index:5; background:var(--bg); padding:6px 0;}
+.vtab{font-family:inherit; font-size:14px; font-weight:600; color:var(--text-muted); background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 6px; cursor:pointer; text-align:center; min-width:0;}
+.vtab .sub{display:block; font-size:10.5px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; opacity:.8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.vtab[aria-selected="true"]{color:var(--surface); background:var(--text); border-color:var(--text);}
+.vpanel{display:none; flex-direction:column; gap:16px;}
+.vpanel.on{display:flex;}
+.remark{border-color:var(--accent);}
+.rm-dirs{display:flex; flex-wrap:wrap; gap:6px;}
+.rm-chip{font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text-muted); background:var(--surface-2); border:1px solid var(--border); border-radius:99px; padding:5px 12px; cursor:pointer;}
+.rm-chip[aria-pressed="true"][data-dir="BULLISH"]{color:var(--long); background:var(--long-soft); border-color:var(--long);}
+.rm-chip[aria-pressed="true"][data-dir="BEARISH"]{color:var(--short); background:var(--short-soft); border-color:var(--short);}
+.rm-chip[aria-pressed="true"][data-dir="NEUTRAL"], .rm-chip[aria-pressed="true"][data-dir="RANGE-BOUND"]{color:var(--amber); background:var(--amber-soft); border-color:var(--amber);}
+.rm-range{display:flex; gap:10px; flex-wrap:wrap;}
+.rm-range label{flex:1; min-width:120px; display:flex; flex-direction:column; gap:3px; font-size:11.5px; color:var(--text-muted);}
+.rm-range input, .remark textarea{font:inherit; font-size:14px; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:8px 10px; width:100%;}
+.remark textarea{resize:vertical; min-height:90px;}
+.rm-actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.btn{font-family:inherit; font-size:13px; font-weight:600; border-radius:7px; padding:8px 14px; cursor:pointer; background:var(--surface-2); color:var(--text); border:1px solid var(--border);}
+.btn.primary{background:var(--text); color:var(--surface); border-color:var(--text);}
+.btn:disabled{opacity:.5; cursor:default;}
+.mini{font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:4px;}
+ul.plain{margin:0; padding-left:18px; font-size:13px; display:flex; flex-direction:column; gap:3px;}
+.rs-row{padding:8px 0; border-bottom:1px dashed var(--border); font-size:13px;}
+.rs-row:last-child{border-bottom:none;}
+.rs-row .lbl{font-weight:600;}
+@media (max-width:480px){ .vtab{font-size:13px; padding:7px 3px;} .vtab .sub{font-size:9.5px;} }
+
 .updated-banner{font-size:11.5px; color:var(--text-muted); background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:8px 14px;}
 </style>
 
@@ -200,7 +227,7 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
     <div class="brandline">
       <div class="eyebrow">Option Trading &middot; Personal Desk</div>
       <div class="title">Nifty Desk</div>
-      <div class="meta">Snapshot generated 24 Sep 2026, 22:15 IST</div>
+      <div class="meta">Snapshot generated 24 Sep 2026, 22:26 IST</div>
     </div>
     <div>
       <div class="spot">
@@ -211,8 +238,14 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
     </div>
   </div>
 
-  <div class="grid">
+  <div class="vtabs" role="tablist" aria-label="Desk sections">
+    <button type="button" class="vtab" role="tab" data-tab="v1">Var 1<span class="sub">FII vs Retail</span></button>
+    <button type="button" class="vtab" role="tab" data-tab="v2">Var 2<span class="sub">Futures OI</span></button>
+    <button type="button" class="vtab" role="tab" data-tab="v3">Var 3<span class="sub">Option chain</span></button>
+    <button type="button" class="vtab" role="tab" data-tab="analyst">Analyst<span class="sub">Nifty view</span></button>
+  </div>
 
+  <section class="vpanel" data-tab="v1">
     <div class="card">
       <div class="card-head">
         <h2>Var 1 &middot; FII vs Retail (Extent of Diff)</h2>
@@ -230,7 +263,30 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
         <div class="spark"><div class="spark-col "><span class="spark-val">5.30</span><div class="spark-bars"><div class="spark-bar" style="height:95%"></div></div><span class="spark-date">09-15</span></div><div class="spark-col "><span class="spark-val">5.21</span><div class="spark-bars"><div class="spark-bar" style="height:94%"></div></div><span class="spark-date">09-16</span></div><div class="spark-col "><span class="spark-val">5.29</span><div class="spark-bars"><div class="spark-bar" style="height:95%"></div></div><span class="spark-date">09-17</span></div><div class="spark-col "><span class="spark-val">5.30</span><div class="spark-bars"><div class="spark-bar" style="height:95%"></div></div><span class="spark-date">09-18</span></div><div class="spark-col "><span class="spark-val">5.32</span><div class="spark-bars"><div class="spark-bar" style="height:96%"></div></div><span class="spark-date">09-21</span></div><div class="spark-col "><span class="spark-val">5.39</span><div class="spark-bars"><div class="spark-bar" style="height:97%"></div></div><span class="spark-date">09-23</span></div><div class="spark-col last"><span class="spark-val">5.56</span><div class="spark-bars"><div class="spark-bar" style="height:100%"></div></div><span class="spark-date">09-24</span></div></div>
       </div>
     </div>
+    <div class="card">
+      <div class="card-head"><h2>Var 1 &middot; Past 7 trading days</h2></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th class="right">Net FII</th><th class="right">Net Client</th><th class="right">Extent of Diff</th><th class="right">Nifty</th></tr></thead>
+        <tbody><tr><td>2026-09-15</td><td class="right num">-291.1</td><td class="right num">239.5</td><td class="right num">5.30</td><td class="right num">23,118.6</td></tr><tr><td>2026-09-16</td><td class="right num">-288.1</td><td class="right num">233.3</td><td class="right num">5.21</td><td class="right num">23,217.6</td></tr><tr><td>2026-09-17</td><td class="right num">-290.0</td><td class="right num">238.9</td><td class="right num">5.29</td><td class="right num">23,270.6</td></tr><tr><td>2026-09-18</td><td class="right num">-288.4</td><td class="right num">241.4</td><td class="right num">5.30</td><td class="right num">23,346.4</td></tr><tr><td>2026-09-21</td><td class="right num">-290.6</td><td class="right num">241.7</td><td class="right num">5.32</td><td class="right num">23,414.3</td></tr><tr><td>2026-09-23</td><td class="right num">-298.6</td><td class="right num">240.2</td><td class="right num">5.39</td><td class="right num">23,446.8</td></tr><tr><td>2026-09-24</td><td class="right num">-309.8</td><td class="right num">246.1</td><td class="right num">5.56</td><td class="right num">23,063.1</td></tr></tbody></table></div>
+      <div><div class="kv"><span class="k">Extent of Diff (09-15 &rarr; 09-24)</span><span class="v"><span style="color:var(--long);">INCREASING</span> <span class="num" style="color:var(--text-muted); font-weight:500;">5.30 &rarr; 5.56 (+0.25)</span></span></div><div class="kv"><span class="k">Net FII (09-15 &rarr; 09-24)</span><span class="v"><span style="color:var(--short);">DECREASING</span> <span class="num" style="color:var(--text-muted); font-weight:500;">-291.1 &rarr; -309.8 (-18.8)</span></span></div><div class="kv"><span class="k">Nifty (09-15 &rarr; 09-24)</span><span class="v"><span style="color:var(--short);">DECREASING</span> <span class="num" style="color:var(--text-muted); font-weight:500;">23,118.6 &rarr; 23,063.1 (-55.5)</span></span></div></div>
+    </div>
+    <div class="card remark" data-var="v1">
+      <div class="card-head">
+        <h2>My remark &middot; Var 1</h2>
+        <span class="pill neutral rm-status">Loading&hellip;</span>
+      </div>
+      <div class="subline">Your read of Nifty from this variable alone, off the 2026-09-24 data. Saved to your desk repo; the analyst combines all three.</div>
+      <div class="rm-dirs" role="group" aria-label="Direction"><button type="button" class="rm-chip" data-dir="BULLISH" aria-pressed="false">Bullish</button><button type="button" class="rm-chip" data-dir="BEARISH" aria-pressed="false">Bearish</button><button type="button" class="rm-chip" data-dir="NEUTRAL" aria-pressed="false">Neutral</button><button type="button" class="rm-chip" data-dir="RANGE-BOUND" aria-pressed="false">Range-Bound</button></div>
+      <div class="rm-range">
+        <label>Range low<input type="number" inputmode="numeric" class="rm-lo num" placeholder="e.g. 23000"></label>
+        <label>Range high<input type="number" inputmode="numeric" class="rm-hi num" placeholder="e.g. 23500"></label>
+      </div>
+      <textarea class="rm-text" rows="4" placeholder="What is this variable telling you about Nifty?"></textarea>
+      <div class="rm-actions"><button type="button" class="btn primary rm-save">Save remark</button><span class="rm-msg subline"></span></div>
+    </div>
+  </section>
 
+  <section class="vpanel" data-tab="v2">
     <div class="card">
       <div class="card-head">
         <h2>Var 2 &middot; Nifty Futures OI (Cumulative)</h2>
@@ -256,7 +312,29 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
         </div>
       </div>
     </div>
+    <div class="card">
+      <div class="card-head"><h2>Var 2 &middot; Past 7 trading days</h2></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th class="right">Total OI</th><th class="right">Chg in OI</th><th class="right">Rate</th><th class="right">Fut close</th><th class="right">Nifty %</th><th>Regime</th></tr></thead>
+        <tbody><tr><td>2026-09-17</td><td class="right num">22,241,115</td><td class="right num" style="color:var(--long);">+107,250</td><td class="right num">+0.48%</td><td class="right num">23,333.4</td><td class="right num">N/A</td><td style="color:var(--text-muted); font-weight:600;">N/A</td></tr><tr><td>2026-09-18</td><td class="right num">22,395,945</td><td class="right num" style="color:var(--long);">+154,830</td><td class="right num">+0.70%</td><td class="right num">23,378.5</td><td class="right num">+0.33%</td><td style="color:var(--long); font-weight:600;">Long Buildup</td></tr><tr><td>2026-09-21</td><td class="right num">22,347,910</td><td class="right num" style="color:var(--short);">-48,035</td><td class="right num">-0.21%</td><td class="right num">23,446.3</td><td class="right num">+0.29%</td><td style="color:var(--long); font-weight:600;">Short Covering</td></tr><tr><td>2026-09-23</td><td class="right num">22,225,775</td><td class="right num" style="color:var(--short);">-213,330</td><td class="right num">-0.95%</td><td class="right num">23,449.8</td><td class="right num">+0.14%</td><td style="color:var(--long); font-weight:600;">Short Covering</td></tr><tr><td>2026-09-24</td><td class="right num">23,401,755</td><td class="right num" style="color:var(--long);">+1,175,980</td><td class="right num">+5.29%</td><td class="right num">23,108.6</td><td class="right num">-1.64%</td><td style="color:var(--short); font-weight:600;">Short Buildup</td></tr></tbody></table></div>
+    </div>
+    <div class="card remark" data-var="v2">
+      <div class="card-head">
+        <h2>My remark &middot; Var 2</h2>
+        <span class="pill neutral rm-status">Loading&hellip;</span>
+      </div>
+      <div class="subline">Your read of Nifty from this variable alone, off the 2026-09-24 data. Saved to your desk repo; the analyst combines all three.</div>
+      <div class="rm-dirs" role="group" aria-label="Direction"><button type="button" class="rm-chip" data-dir="BULLISH" aria-pressed="false">Bullish</button><button type="button" class="rm-chip" data-dir="BEARISH" aria-pressed="false">Bearish</button><button type="button" class="rm-chip" data-dir="NEUTRAL" aria-pressed="false">Neutral</button><button type="button" class="rm-chip" data-dir="RANGE-BOUND" aria-pressed="false">Range-Bound</button></div>
+      <div class="rm-range">
+        <label>Range low<input type="number" inputmode="numeric" class="rm-lo num" placeholder="e.g. 23000"></label>
+        <label>Range high<input type="number" inputmode="numeric" class="rm-hi num" placeholder="e.g. 23500"></label>
+      </div>
+      <textarea class="rm-text" rows="4" placeholder="What is this variable telling you about Nifty?"></textarea>
+      <div class="rm-actions"><button type="button" class="btn primary rm-save">Save remark</button><span class="rm-msg subline"></span></div>
+    </div>
+  </section>
 
+  <section class="vpanel" data-tab="v3">
     <div class="card full">
       <div class="card-head">
         <h2>Var 3 &middot; Option Chain &mdash; Open Interest by Strike</h2>
@@ -282,7 +360,37 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
 
       <div class="subline" id="ocRuleLine">Rule: Max Call OI strike = resistance (upper bound) &mdash; large call writers defend it from above. Max Put OI strike = support (lower bound) &mdash; large put writers defend it from below. Market expected to hold inside these two strikes through the shown expiry, absent a fresh writer shift.</div>
     </div>
+    <div class="card">
+      <div class="card-head"><h2>Var 3 &middot; Past 7 trading days (nearest 3 expiries)</h2></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th class="right">Max Call OI</th><th class="right">Max Put OI</th><th class="right">Call buildup</th><th class="right">Put buildup</th><th class="right">Nifty</th></tr></thead>
+        <tbody><tr><td>2026-09-17</td><td class="right num" style="color:var(--short);">24,000</td><td class="right num" style="color:var(--long);">23,000</td><td class="right num">24,500</td><td class="right num">23,300</td><td class="right num">23,270.6</td></tr><tr><td>2026-09-18</td><td class="right num" style="color:var(--short);">24,000</td><td class="right num" style="color:var(--long);">23,000</td><td class="right num">23,400</td><td class="right num">23,300</td><td class="right num">23,346.4</td></tr><tr><td>2026-09-21</td><td class="right num" style="color:var(--short);">24,000</td><td class="right num" style="color:var(--long);">23,300</td><td class="right num">23,650</td><td class="right num">23,400</td><td class="right num">23,414.3</td></tr><tr><td>2026-09-23</td><td class="right num" style="color:var(--short);">24,000</td><td class="right num" style="color:var(--long);">23,000</td><td class="right num">23,900</td><td class="right num">23,400</td><td class="right num">23,446.8</td></tr><tr><td>2026-09-24</td><td class="right num" style="color:var(--short);">24,000</td><td class="right num" style="color:var(--long);">23,000</td><td class="right num">23,200</td><td class="right num">22,000</td><td class="right num">23,063.1</td></tr></tbody></table></div>
+    </div>
+    <div class="card remark" data-var="v3">
+      <div class="card-head">
+        <h2>My remark &middot; Var 3</h2>
+        <span class="pill neutral rm-status">Loading&hellip;</span>
+      </div>
+      <div class="subline">Your read of Nifty from this variable alone, off the 2026-09-24 data. Saved to your desk repo; the analyst combines all three.</div>
+      <div class="rm-dirs" role="group" aria-label="Direction"><button type="button" class="rm-chip" data-dir="BULLISH" aria-pressed="false">Bullish</button><button type="button" class="rm-chip" data-dir="BEARISH" aria-pressed="false">Bearish</button><button type="button" class="rm-chip" data-dir="NEUTRAL" aria-pressed="false">Neutral</button><button type="button" class="rm-chip" data-dir="RANGE-BOUND" aria-pressed="false">Range-Bound</button></div>
+      <div class="rm-range">
+        <label>Range low<input type="number" inputmode="numeric" class="rm-lo num" placeholder="e.g. 23000"></label>
+        <label>Range high<input type="number" inputmode="numeric" class="rm-hi num" placeholder="e.g. 23500"></label>
+      </div>
+      <textarea class="rm-text" rows="4" placeholder="What is this variable telling you about Nifty?"></textarea>
+      <div class="rm-actions"><button type="button" class="btn primary rm-save">Save remark</button><span class="rm-msg subline"></span></div>
+    </div>
+  </section>
 
+  <section class="vpanel" data-tab="analyst">
+    <div class="card">
+      <div class="card-head"><h2>Your remarks &middot; 2026-09-24</h2><span class="pill neutral" id="rmCount">Loading&hellip;</span></div>
+      <div id="rmSummary"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>Analyst view &middot; 2026-09-24</h2><span class="pill amber">Pending</span></div>
+      <div class="subline">Once your three remarks are saved, tell your assistant <b>"Analyst View:"</b>. It reads all three, builds the combined Nifty view here, logs it to your journal and learns from how you read each variable.</div>
+    </div>
     <div class="card">
       <div class="card-head">
         <h2>Ashish's Verdict &mdash; 2026-09-18</h2>
@@ -294,8 +402,17 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
       <div class="kv"><span class="k">Last scored view (2026-09-18)</span><span class="v" style="color:var(--long);">HIT</span></div>
       <div class="testflag">Journal note on this entry reads: "Test capture -- delete this entry from journal after verifying." Flagging rather than treating it as a real call &mdash; confirm or clear it and it'll update here.</div>
     </div>
+    <div class="card">
+      <div class="card-head"><h2>Desk key</h2><span class="pill neutral" id="keyState">&hellip;</span></div>
+      <div class="subline">Remarks save to your nifty-desk repo using a GitHub key kept only in this browser. Needed once per device.</div>
+      <div class="rm-range">
+        <label style="flex:2;">GitHub key<input type="password" id="keyInput" autocomplete="off" placeholder="github_pat_..."></label>
+      </div>
+      <div class="rm-actions"><button type="button" class="btn primary" id="keySave">Save key</button><button type="button" class="btn" id="keyForget">Forget key</button></div>
+    </div>
+  </section>
 
-    <div class="card full">
+  <div class="card full">
       <div class="card-head">
         <h2>30-Day Forward Lookahead</h2>
         <span class="meta">Calendar refreshed 2026-09-18 &middot; next refresh due 2026-10-22</span>
@@ -370,8 +487,6 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
           <span>RBI issued Governance Amendment Directions for Commercial, Small Finance, Payments and Local Area Banks -- effective Oct 1, 2026. <a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx" target="_blank" rel="noopener">Read &rarr;</a></span>
         </div></div>
     </div>
-
-  </div>
 
   <footer>Auto-updated daily by Ashish's assistant &mdash; option-trading-analyst agent + option-trading-view skill.</footer>
 </div>
@@ -555,6 +670,155 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
 
   render(ORDER[0]);
 })();
+</script>
+<script>
+(function(){
+  var REPO = "Pal669/nifty-desk", BRANCH = "master", DATA_DATE = "2026-09-24";
+  var PATH = "remarks/" + DATA_DATE + ".json";
+  var LABELS = {v1: "Var 1 · FII vs Retail", v2: "Var 2 · Futures OI", v3: "Var 3 · Option chain"};
+  var KEY_NAME = "niftyDeskKey";
+
+  function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+  function lsSet(k, v){ try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch(e){} }
+
+  // ---- tabs ----
+  var tabs = document.querySelectorAll(".vtab"), panels = document.querySelectorAll(".vpanel");
+  function show(t){
+    tabs.forEach(function(b){ b.setAttribute("aria-selected", b.dataset.tab === t ? "true" : "false"); });
+    panels.forEach(function(p){ p.classList.toggle("on", p.dataset.tab === t); });
+    lsSet("niftyDeskTab", t);
+    if (location.hash !== "#" + t) history.replaceState(null, "", "#" + t);
+  }
+  tabs.forEach(function(b){ b.addEventListener("click", function(){ show(b.dataset.tab); }); });
+  var start = (location.hash || "").slice(1) || lsGet("niftyDeskTab") || "v1";
+  show(["v1","v2","v3","analyst"].indexOf(start) >= 0 ? start : "v1");
+
+  // ---- GitHub contents API ----
+  function b64enc(str){ return btoa(unescape(encodeURIComponent(str))); }
+  function b64dec(b){ return decodeURIComponent(escape(atob(b.replace(/\n/g, "")))); }
+  function headers(){
+    var h = {"Accept": "application/vnd.github+json"};
+    var k = lsGet(KEY_NAME); if (k) h["Authorization"] = "Bearer " + k;
+    return h;
+  }
+  var API = "https://api.github.com/repos/" + REPO + "/contents/" + PATH;
+  function getDoc(){
+    return fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), {headers: headers(), cache: "no-store"}).then(function(r){
+      if (r.status === 404) return {doc: {date: DATA_DATE}, sha: null};
+      if (!r.ok) throw new Error("read " + r.status);
+      return r.json().then(function(j){ return {doc: JSON.parse(b64dec(j.content)), sha: j.sha}; });
+    });
+  }
+  function putDoc(doc, sha, msg){
+    var body = {message: msg, content: b64enc(JSON.stringify(doc, null, 2)), branch: BRANCH};
+    if (sha) body.sha = sha;
+    var h = headers(); h["Content-Type"] = "application/json";
+    return fetch(API, {method: "PUT", headers: h, body: JSON.stringify(body)}).then(function(r){
+      if (r.status === 401 || r.status === 403) throw new Error("KEY");
+      if (r.status === 409 || r.status === 422) throw new Error("CONFLICT");
+      if (!r.ok) throw new Error("save " + r.status);
+      return r.json();
+    });
+  }
+
+  // ---- remark panels ----
+  var current = {};
+  function panel(v){ return document.querySelector('.remark[data-var="' + v + '"]'); }
+  function setStatus(el, text, cls){ var s = el.querySelector(".rm-status"); s.textContent = text; s.className = "pill " + cls + " rm-status"; }
+  function fill(v, r){
+    var el = panel(v); if (!el) return;
+    el.querySelectorAll(".rm-chip").forEach(function(c){ c.setAttribute("aria-pressed", r && r.direction === c.dataset.dir ? "true" : "false"); });
+    el.querySelector(".rm-lo").value = r && r.range_lower != null ? r.range_lower : "";
+    el.querySelector(".rm-hi").value = r && r.range_upper != null ? r.range_upper : "";
+    el.querySelector(".rm-text").value = r && r.text ? r.text : "";
+    if (r && (r.text || r.direction)) setStatus(el, "Saved " + new Date(r.updated_at).toLocaleString("en-IN", {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit"}), "long");
+    else setStatus(el, "Not saved yet", "neutral");
+  }
+  function summary(){
+    var box = document.getElementById("rmSummary"), n = 0;
+    box.innerHTML = "";
+    ["v1","v2","v3"].forEach(function(v){
+      var r = current[v], row = document.createElement("div"); row.className = "rs-row";
+      var lbl = document.createElement("div"); lbl.className = "lbl"; lbl.textContent = LABELS[v]; row.appendChild(lbl);
+      var body = document.createElement("div");
+      if (r && (r.text || r.direction)){
+        n++;
+        var bits = [];
+        if (r.direction) bits.push(r.direction);
+        if (r.range_lower != null || r.range_upper != null) bits.push("range " + (r.range_lower != null ? r.range_lower : "?") + "–" + (r.range_upper != null ? r.range_upper : "?"));
+        body.textContent = (bits.length ? bits.join(" | ") + " — " : "") + (r.text || "");
+      } else { body.textContent = "Not written yet"; body.style.color = "var(--text-muted)"; }
+      row.appendChild(body); box.appendChild(row);
+    });
+    var c = document.getElementById("rmCount");
+    c.textContent = n + " of 3 in"; c.className = "pill " + (n === 3 ? "long" : "neutral");
+  }
+  function load(){
+    getDoc().then(function(res){
+      current = res.doc || {};
+      ["v1","v2","v3"].forEach(function(v){ fill(v, current[v]); });
+      summary();
+    }).catch(function(){
+      ["v1","v2","v3"].forEach(function(v){ var el = panel(v); if (el) setStatus(el, "Couldn't load saved remark", "amber"); });
+      document.getElementById("rmSummary").textContent = "Couldn't reach GitHub to load remarks. Refresh to retry.";
+    });
+  }
+
+  document.querySelectorAll(".remark").forEach(function(el){
+    var v = el.dataset.var;
+    el.querySelectorAll(".rm-chip").forEach(function(c){
+      c.addEventListener("click", function(){
+        var on = c.getAttribute("aria-pressed") === "true";
+        el.querySelectorAll(".rm-chip").forEach(function(x){ x.setAttribute("aria-pressed", "false"); });
+        c.setAttribute("aria-pressed", on ? "false" : "true");
+      });
+    });
+    el.querySelector(".rm-save").addEventListener("click", function(){
+      var msg = el.querySelector(".rm-msg"), btn = this;
+      if (!lsGet(KEY_NAME)){ msg.textContent = "Add your GitHub key first (Analyst tab → Desk key)."; return; }
+      var pressed = el.querySelector('.rm-chip[aria-pressed="true"]');
+      var lo = el.querySelector(".rm-lo").value, hi = el.querySelector(".rm-hi").value;
+      var entry = {
+        direction: pressed ? pressed.dataset.dir : null,
+        range_lower: lo === "" ? null : Number(lo),
+        range_upper: hi === "" ? null : Number(hi),
+        text: el.querySelector(".rm-text").value.trim(),
+        updated_at: new Date().toISOString()
+      };
+      if (!entry.direction && !entry.text){ msg.textContent = "Pick a direction or write something first."; return; }
+      btn.disabled = true; msg.textContent = "Saving…";
+      function attempt(retry){
+        return getDoc().then(function(res){
+          var doc = res.doc || {date: DATA_DATE}, prev = doc[v];
+          var hist = (prev && prev.history) ? prev.history.slice() : [];
+          if (prev){ var old = Object.assign({}, prev); delete old.history; hist.push(old); }
+          entry.history = hist;
+          doc.date = DATA_DATE; doc[v] = entry;
+          return putDoc(doc, res.sha, "Remark " + v + " for " + DATA_DATE).then(function(){ return doc; });
+        }).catch(function(e){ if (e.message === "CONFLICT" && retry) return attempt(false); throw e; });
+      }
+      attempt(true).then(function(doc){
+        current = doc; fill(v, doc[v]); summary(); msg.textContent = "Saved to your desk repo.";
+      }).catch(function(e){
+        msg.textContent = e.message === "KEY" ? "GitHub rejected the key — check it has Contents: write on nifty-desk." : "Save failed (" + e.message + "). Your text is still here — try again.";
+      }).then(function(){ btn.disabled = false; });
+    });
+  });
+
+  // ---- key box ----
+  function keyState(){
+    var s = document.getElementById("keyState"), has = !!lsGet(KEY_NAME);
+    s.textContent = has ? "Connected on this device" : "Not set on this device"; s.className = "pill " + (has ? "long" : "amber");
+  }
+  document.getElementById("keySave").addEventListener("click", function(){
+    var v = document.getElementById("keyInput").value.trim(); if (!v) return;
+    lsSet(KEY_NAME, v); document.getElementById("keyInput").value = ""; keyState(); load();
+  });
+  document.getElementById("keyForget").addEventListener("click", function(){ lsSet(KEY_NAME, null); keyState(); });
+  keyState();
+  load();
+})();
+
 </script>
 </body>
 </html>
