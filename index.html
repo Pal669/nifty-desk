@@ -124,6 +124,18 @@ tr:last-child td{border-bottom:none;}
 .spark-col.last .spark-bar{background:var(--accent);}
 .spark-date{font-size:9.5px; color:var(--text-muted); white-space:nowrap;}
 
+.oib{display:flex; align-items:flex-end; gap:5px; margin-top:4px;}
+.oib-col{flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:2px;}
+.oib-lbl{font-size:10px; font-weight:600; color:var(--text-muted); white-space:nowrap;}
+.oib-plot{position:relative; width:100%; height:120px; border-bottom:1px solid var(--border);}
+.oib-seg{position:absolute; left:0; right:0; bottom:0;}
+.oib-seg.base, .sw.base{background:var(--accent); opacity:.55;}
+.oib-seg.add, .sw.add{background:var(--long);}
+.oib-seg.cut, .sw.cut{background:repeating-linear-gradient(45deg, var(--short) 0 2px, transparent 2px 5px); outline:1px solid var(--short); outline-offset:-1px;}
+.oib-fut{font-size:9.5px; font-weight:600; white-space:nowrap;}
+.oib-legend{display:flex; flex-wrap:wrap; gap:4px 12px; font-size:11px; color:var(--text-muted); margin-top:8px;}
+.oib-legend .sw{display:inline-block; width:10px; height:10px; margin-right:4px; vertical-align:-1px; border-radius:2px;}
+
 .levelbar{position:relative; height:34px; border-radius:6px; background:var(--surface-2); margin-top:4px;}
 .levelbar .zone{position:absolute; top:0; bottom:0; background:var(--accent-soft); border-radius:6px;}
 .levelbar .spotmark{position:absolute; top:-6px; bottom:-6px; width:2px; background:var(--text);}
@@ -188,7 +200,7 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
     <div class="brandline">
       <div class="eyebrow">Option Trading &middot; Personal Desk</div>
       <div class="title">Nifty Desk</div>
-      <div class="meta">Snapshot generated 24 Sep 2026, 19:54 IST</div>
+      <div class="meta">Snapshot generated 24 Sep 2026, 22:15 IST</div>
     </div>
     <div>
       <div class="spot">
@@ -233,6 +245,16 @@ footer{font-size:11.5px; color:var(--text-muted); text-align:center; padding-top
       <div class="kv"><span class="k">Streak</span><span class="v">1 session</span></div>
       <div class="kv"><span class="k">Unusual volume</span><span class="v" style="color:var(--text-muted); font-weight:500;">N/A -- building 5d history</span></div>
       <div class="kv"><span class="k">Support / resistance (OI-derived)</span><span class="v" style="color:var(--text-muted); font-weight:500;">None active yet</span></div>
+      <div>
+        <div class="subline" style="margin-bottom:4px;">7-day total OI vs change in OI (lakh contracts, all 3 expiries)</div>
+        <div class="oib"><div class="oib-col"><span class="oib-lbl num">222.4</span><span class="oib-lbl num" style="color:var(--long);">+1.07</span><div class="oib-plot"><div class="oib-seg base" style="height:60.47%"></div><div class="oib-seg add" style="bottom:60.47%; height:3.04%"></div></div><span class="spark-date">09-17</span><span class="oib-fut num">23,333.4</span></div><div class="oib-col"><span class="oib-lbl num">224.0</span><span class="oib-lbl num" style="color:var(--long);">+1.55</span><div class="oib-plot"><div class="oib-seg base" style="height:63.51%"></div><div class="oib-seg add" style="bottom:63.51%; height:4.39%"></div></div><span class="spark-date">09-18</span><span class="oib-fut num">23,378.5</span></div><div class="oib-col"><span class="oib-lbl num">223.5</span><span class="oib-lbl num" style="color:var(--short);">-0.48</span><div class="oib-plot"><div class="oib-seg base" style="height:66.54%"></div><div class="oib-seg cut" style="bottom:66.54%; height:1.36%"></div></div><span class="spark-date">09-21</span><span class="oib-fut num">23,446.3</span></div><div class="oib-col"><span class="oib-lbl num">222.3</span><span class="oib-lbl num" style="color:var(--short);">-2.13</span><div class="oib-plot"><div class="oib-seg base" style="height:63.08%"></div><div class="oib-seg cut" style="bottom:63.08%; height:6.05%"></div></div><span class="spark-date">09-23</span><span class="oib-fut num">23,449.8</span></div><div class="oib-col"><span class="oib-lbl num">234.0</span><span class="oib-lbl num" style="color:var(--long);">+11.76</span><div class="oib-plot"><div class="oib-seg base" style="height:63.08%"></div><div class="oib-seg add" style="bottom:63.08%; height:33.33%"></div></div><span class="spark-date">09-24</span><span class="oib-fut num">23,108.6</span></div></div>
+        <div class="oib-legend">
+          <span><i class="sw base"></i>Carried from prev day</span>
+          <span><i class="sw add"></i>OI added</span>
+          <span><i class="sw cut"></i>OI cut</span>
+          <span>Bottom row: near-month futures close &middot; axis starts at 200 L</span>
+        </div>
+      </div>
     </div>
 
     <div class="card full">
